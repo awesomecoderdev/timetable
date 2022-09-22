@@ -304,7 +304,7 @@ svg{
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
-  max-width: 1280px;
+  max-width: 1080px;
   margin: 2rem auto;
   gap: 0;
 }
@@ -518,18 +518,17 @@ svg{
   grid-auto-flow: column;
   grid-template-rows: repeat(6, minmax(0, 1fr));
   gap: 0.375rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-
+  font-size: 0.5rem;
+  line-height: 0.25rem;
   color: rgb(255 255 255 / 1);
 }
 .hr_time_btn{
-  font-size: 0.675rem;
+  font-size: 0.5rem;
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  height: 2.08rem;
-  width: 2.08rem;
+  height: 1.5rem;
+  width: 1.5rem;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;

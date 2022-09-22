@@ -12,7 +12,7 @@ const mix = require("laravel-mix");
 
 mix
   .webpackConfig({ stats: { children: false } })
-  .js("src/frontend/js/frontend.js", "js")
+  .js("src/frontend.js", "js")
   .react()
   .sourceMaps(false, "source-map")
   .disableSuccessNotifications();

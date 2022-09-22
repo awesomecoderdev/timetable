@@ -255,7 +255,7 @@ const Time = () => {
                                           "calender_default_btn", // default class
                                           isEqual(day,today) && 'current_date_btn', // set current date color
                                           (tday > day) && 'previous_next_month_btn', // disable previous date to select
-                                          !isSameMonth(day, today) && !isEqual(day,today) && !(today > day) && 'not_same_month', // set different month date color
+                                          !isSameMonth(day, today) &&  !(tday > day) && 'not_same_month', // set different month date color
                                          )}
                                       >
                                         <time dateTime={format(day, 'yyyy-MM-dd')}>

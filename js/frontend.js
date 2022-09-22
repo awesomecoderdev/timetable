@@ -3139,7 +3139,7 @@ var Time = function Time() {
                                 className: classNames("calender_default_btn", // default class
                                 (0,date_fns__WEBPACK_IMPORTED_MODULE_17__["default"])(day, today) && 'current_date_btn', // set current date color
                                 tday > day && 'previous_next_month_btn', // disable previous date to select
-                                !(0,date_fns__WEBPACK_IMPORTED_MODULE_18__["default"])(day, today) && !(0,date_fns__WEBPACK_IMPORTED_MODULE_17__["default"])(day, today) && !(today > day) && 'not_same_month' // set different month date color
+                                !(0,date_fns__WEBPACK_IMPORTED_MODULE_18__["default"])(day, today) && !(tday > day) && 'not_same_month' // set different month date color
                                 ),
                                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("time", {
                                   dateTime: (0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(day, 'yyyy-MM-dd'),

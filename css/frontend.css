@@ -156,7 +156,6 @@ svg{
   grid-template-columns: repeat(7, minmax(0, 1fr));
   font-size: 0.875rem;
   line-height: 1.25rem;
-
   color: rgb(100 116 139 / 1);
 }
 .calendar_week_names{
@@ -810,9 +809,9 @@ svg{
 /* top of week */
 .week_container{
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
   font-family: 'Poppins', sans-serif;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -835,4 +834,43 @@ svg{
 
 .week_item svg{
   fill:  rgb(100 116 139);
+}
+
+
+
+
+/* popup */
+.popup_calendar{
+  position: absolute;
+  z-index: 10;
+  margin-top: 2.75rem;
+  padding: 0 1rem;
+  width: 20rem;
+  max-width: 100%;
+}
+
+.calendar_popup_item{
+  position: relative;
+  width: 100%;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: rgb(156 163 175 / 0.2);
+  background-color: rgb(255 255 255 / 1);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.popup_calendar_card{
+  margin: 0px;
+  width: 100%;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.pos_relative{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }

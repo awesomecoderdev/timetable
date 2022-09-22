@@ -29,6 +29,7 @@ import {
   startOfToday,
   startOfWeek,
   endOfWeek,
+  startOfMonth,
 } from "date-fns";
 import axios from "axios";
 import { scheduleJson } from "./Data";
@@ -56,7 +57,13 @@ const Time = () => {
   const [selectedSchedule, setSelectedSchedule] = useState([]);
   const [currentHour, setCurrentHour] = useState(new Date());
   const [currentDay, setCurrentDay] = useState(today);
+  const [startCalendar, setStartCalendar] = useState(today);
   const firstCurrentHour = parse(currentHour, "MMM-yyyy", new Date());
+
+  const days = eachDayOfInterval({
+    start: startOfWeek(startOfMonth(startCalendar)),
+    end: endOfWeek(endOfMonth(startCalendar)),
+  })
 
   const currentWeek = eachDayOfInterval({
     start: startOfWeek(today),
@@ -150,22 +157,16 @@ const Time = () => {
   };
 
   function previousMonth() {
-    // const firstDayNextMonth = add(firstDayCurrentMonth, { months: -5 })
-    // setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'))
+    console.log("previousMonth");
+    const firstDayNextMonth = add(startCalendar, { months: -1 })
+    setStartCalendar(firstDayNextMonth)
   }
   function nextMonth() {
-    // const firstDayNextMonth = add(firstDayCurrentMonth, { months: 5 })
-    // setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'))
+    const firstDayNextMonth = add(startCalendar, { months: 1 })
+    setStartCalendar(firstDayNextMonth);
   }
 
-  const days = eachDayOfInterval({
-    start: startOfWeek(today),
-    end: endOfWeek(endOfMonth(today)),
-  })
-
   return (
-
-
     <Fragment>
       {/* <div className="hours_container">
           <div className="hours_header_wraper">
@@ -191,37 +192,24 @@ const Time = () => {
 
       <div className="container">
         <div className="week_container">
-          <button className={`active week_item`} type="button">
-            Week {format(today, "I")}
-          </button>
-          {/* <button className="week_item" type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" color="currentColor">
-              <path d="M21 20V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2zM9 18H7v-2h2v2zm0-4H7v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm2-5H5V7h14v2z"></path>
-            </svg>
-          </button> */}
-          <Popover className="relative_card">
+
+          <Popover className="pos_relative">
             {({ open }) => (
               <>
+              <button className={`active week_item`} type="button">
+                Week {format(today, "I")}
+              </button>
                 <Popover.Button
-                  onClick={processSubmit}
+                  // onClick={processSubmit}
                   className={`week_item`}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" color="currentColor">
                       <path d="M21 20V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2zM9 18H7v-2h2v2zm0-4H7v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm2-5H5V7h14v2z"></path>
                     </svg>
                 </Popover.Button>
-                <Transition
-                  as={Fragment}
-                  enter="hr_popup_enter"
-                  enterFrom="hr_popup_enterFrom"
-                  enterTo="hr_popup_enterTo"
-                  leave="hr_popup_leave"
-                  leaveFrom="hr_popup_leaveFrom"
-                  leaveTo="hr_popup_leaveTo"
-                >
-                  <Popover.Panel className="hr_submit_popup">
-                    <div className="calendar_list_item">
-                      <div className="calendar_card" >
+                <Popover.Panel className="popup_calendar">
+                    <div className="calendar_popup_item">
+                      <div className="popup_calendar_card" >
                         <div className="calendar_inner">
                             <div className="calendar_relative">
                                 <div className="calendar_header">
@@ -230,7 +218,7 @@ const Time = () => {
                                   </button>
 
                                   <span className="calendar_h2">
-                                    {/* {format(month, 'MMMM yyyy')} */}
+                                    {format(startCalendar, 'MMMM yyyy')}
                                   </span>
                                   <button onClick={nextMonth} type="button" className="calendar_next_prev_btn">
                                     <ChevronRightIcon className="next_prev_icon" aria-hidden="true" />
@@ -258,15 +246,18 @@ const Time = () => {
                                       <button
                                         type="button"
                                         onClick={() => {
-                                          const dy = format(day, 'd-MM-yyyy');
-                                          const redirect = `${window.location.origin}${window.location.pathname}?start=${dy}`;
-                                          window.location = redirect;
+                                          console.log('====================================');
+                                          console.log(day);
+                                          console.log('====================================');
+                                          // const dy = format(day, 'd-MM-yyyy');
+                                          // const redirect = `${window.location.origin}${window.location.pathname}?start=${dy}`;
+                                          // window.location = redirect;
                                         }}
                                         className={classNames(
                                           "calender_default_btn", // default class
-                                          isEqual(day, today) && isToday(day) && 'current_date_btn', // set current date color
-                                          (today > day) && 'previous_next_month_btn', // disable previous date to select
-                                          // !isSameMonth(day, month) && !(today > day) && 'not_same_month', // set different month date color
+                                          isEqual(day,startOfToday()) && isToday(day) && 'current_date_btn', // set current date color
+                                          (startOfToday() > day) && 'previous_next_month_btn', // disable previous date to select
+                                          !isSameMonth(day, startOfToday()) && !(startOfToday() > day) && 'not_same_month', // set different month date color
                                          )}
                                       >
                                         <time dateTime={format(day, 'yyyy-MM-dd')}>
@@ -280,8 +271,7 @@ const Time = () => {
                         </div>
                       </div>
                     </div>
-                  </Popover.Panel>
-                </Transition>
+                </Popover.Panel>
               </>
             )}
           </Popover>

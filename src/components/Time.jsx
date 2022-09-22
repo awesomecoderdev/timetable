@@ -169,28 +169,6 @@ const Time = () => {
 
   return (
     <Fragment>
-      {/* <div className="hours_container">
-          <div className="hours_header_wraper">
-            <button
-              type="button"
-              onClick={previousDay}
-              className="go_next_prev_hr"
-            >
-              <ChevronLeftIcon className="go_next_prev_hr_icon " aria-hidden="true" />
-            </button>
-            <span className="current_hr_text">
-              {format(currentDay, 'd MMMM yyyy')}
-            </span>
-            <button
-              onClick={nextDay}
-              type="button"
-              className="go_next_prev_hr"
-            >
-              <ChevronRightIcon className="go_next_prev_hr_icon" aria-hidden="true" />
-            </button>
-          </div>
-        </div> */}
-
       <div className="container">
         <div className="week_container">
 

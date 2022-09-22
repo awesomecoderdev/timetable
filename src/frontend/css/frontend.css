@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* calendar_container */
+.calendar_container{
+    @apply w-full relative max-w-4xl mx-auto grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4;
+}
+.calendar_list_item{
+    @apply rounded-lg relative w-full bg-white shadow-md border border-gray-400/20;
+}
+/* calendar */
+.calendar_date_list{
+    @apply grid grid-cols-7 mt-2 text-sm text-slate-500;
+}
+.calendar_week_names{
+    @apply grid grid-cols-7 mt-10 text-xs leading-4 text-center text-gray-500;
+}
+.calendar_header{
+    @apply flex items-center;
+}
+.calendar_h2{
+    @apply ml-2 flex-auto font-semibold text-gray-900;
+}
+.calendar_next_prev_btn{
+    @apply mx-1 -my-1.5 flex flex-none items-center justify-center p-1.5 hover:bg-gray-200 bg-gray-300/50 rounded-full text-gray-500 hover:text-gray-600;
+}
+.next_prev_icon{
+    @apply w-5 h-5;
+}
+.calendar_card{
+    @apply w-full px-3 py-4 m-0 ;
+}
+.calendar_inner{
+    @apply md:divide-x md:divide-gray-200;
+}
+/* calendar grid  */
+.start-2{
+    @apply col-start-2;
+}
+.start-3{
+    @apply col-start-3;
+}
+.start-4{
+    @apply col-start-4;
+}
+.start-5{
+    @apply col-start-5;
+}
+.start-6{
+    @apply col-start-6;
+}
+.start-7{
+    @apply col-start-7;
+}
+.padding_y{
+    @apply py-1.5;
+}
+.calendar_relative{
+    @apply relative;
+}
+/* calendar button  */
+.calender_default_btn{
+    @apply mx-auto flex h-8 w-8 items-center justify-center rounded-full font-normal font-poppins;
+}
+.current_date_btn{
+    @apply bg-green-500 text-white;
+}
+.selected_date_btn{
+    @apply bg-sky-500/20 text-slate-500;
+}
+.previous_next_month_btn{
+    @apply bg-slate-500/50 text-white opacity-70 pointer-events-none;
+}
+
+/* time table card */
+.selected_hour{
+    @apply bg-green-500/50 text-white;
+}
+
+/* start hours css */
+
+.hours_container{
+    @apply w-full relative flex justify-center items-center text-center;
+}
+.hours_wraper{
+    @apply relative flex w-full justify-center items-center;
+}
+.hours_header_wraper{
+    @apply max-w-sm w-full py-4 flex justify-between items-center;
+}
+
+.go_next_prev_hr{
+    @apply -my-1.5 flex flex-none items-center justify-center p-1.5 hover:bg-gray-200 bg-gray-300/50 rounded-full text-gray-500 hover:text-gray-600;
+}
+
+.go_next_prev_hr_icon{
+    @apply h-5 w-5;
+}
+
+.current_hr_text{
+    @apply lg:text-2xl md:text-xl text-lg mb-0 text-slate-500 font-poppins font-semibold;
+}
+
+
+.hr_container{
+    @apply font-poppins;
+    tab-size: 4;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    font-weight: inherit;
+    font-size: 1rem;
+    line-height: inherit;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+    position: relative;
+    display: grid;
+    width: 100%;
+    max-width: 80rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.hr_card_item{
+    @apply rounded-lg relative w-full bg-white shadow-md border border-gray-400/20 lg:max-w-xs max-w-full;
+}
+
+.hr_card_content{
+    @apply w-full px-3 py-4 m-0;
+}
+
+.hr_card_body{
+    @apply md:divide-x md:divide-transparent;
+}
+
+.p_relative{
+    @apply relative p-4;
+}
+.relative_card{
+    @apply relative;
+}
+.hr_card_header{
+    @apply flex items-center;
+}
+.hr_card_title{
+    @apply my-2 font-semibold font-poppins text-sm w-full text-start leading-4 text-gray-500;
+}
+
+.hr_card_save{
+    @apply relative w-auto;
+}
+.hr_card_save_btn{
+    @apply mr-4 p-3 rounded-full font-poppins font-semibold text-sm text-white  bg-primary-400 ;
+
+}
+.hr_card_save_btn.inactive{
+    @apply text-opacity-90;
+}
+.icon_4{
+    @apply h-4 w-4;
+}
+.hr_btns_container{
+    @apply grid grid-flow-col grid-rows-6 gap-1.5 mt-2 text-sm text-white ;
+}
+.hr_time_btn{
+    @apply mx-auto flex h-12 w-12 items-center justify-center rounded-full font-normal font-poppins;
+}
+.hr_time_btn.disabled{
+    @apply bg-slate-500/50 text-white opacity-70 pointer-events-none;
+}
+.hr_time_btn.normal{
+    @apply bg-red-400 hover:bg-red-500;
+}
+.hr_time_btn.a{
+    @apply bg-yellow-600 hover:bg-yellow-700 text-white;
+}
+.hr_time_btn.b{
+    @apply bg-yellow-500 hover:bg-yellow-600 text-white;
+}
+.hr_time_btn.h{
+    @apply  bg-slate-400 hover:bg-slate-500 text-white;
+}
+
+.hr_time_btn.a_selected{
+    @apply bg-yellow-600 hover:bg-yellow-700 text-white;
+}
+.hr_time_btn.b_selected{
+    @apply bg-yellow-500 hover:bg-yellow-600 text-white;
+}
+.hr_time_btn.h_selected{
+    @apply  bg-slate-400 hover:bg-slate-500 text-white;
+}
+.hr_time{
+    @apply pointer-events-none;
+}
+
+.hr_tabs{
+    @apply w-full px-3 py-4 m-0;
+}
+.hr_tab_header{
+    @apply flex justify-between bg-white overflow-x-auto overflow-y-hidden;
+}
+
+.hr_tab_btn{
+    @apply text-sm font-poppins  px-2 py-1;
+}
+.hr_tab_btn.selected{
+    @apply bg-gray-300 hover:bg-white border shadow-xl drop-shadow-lg text-gray-700  hover:text-gray-800 border-slate-500/10;
+}
+
+.hr_tab_btn.normal{
+    @apply text-gray-500 hover:bg-white hover:text-gray-600 border border-gray-500/10;
+}
+
+.hr_tab_body{
+    @apply mt-2;
+}
+
+/* popup */
+.hr_submit_popup{
+    @apply absolute md:right-[0] -right-1/2 z-10 mt-3  w-screen  transform px-4 sm:px-0 max-w-xs lg:max-w-xs ;
+}
+.hr_popup_container{
+    @apply overflow-hidden rounded-lg shadow-lg ring-1 bg-white ring-black ring-opacity-5 p-3;
+}
+.hr_popup_card{
+    @apply grid;
+}
+.hr_popup_content{
+    @apply relative w-full;
+}
+.hr_popup_text{
+    @apply relative font-poppins;
+}
+.hr_popup_select{
+    @apply text-sm font-semibold font-poppins my-2;
+}
+.hr_popup_footer_container{
+    @apply relative w-full;
+}
+.hr_footer_btns{
+    @apply flex justify-end;
+}
+.hr_popup_cancel_btn{
+    @apply text-sm font-semibold font-poppins text-white px-2 py-1 mx-1 bg-red-400;
+}
+.hr_popup_ok_btn{
+    @apply text-sm font-semibold font-poppins text-white px-2 py-1 mx-1 bg-primary-400;
+}
+.hr_popup_enter{
+   @apply transition ease-out duration-200;
+}
+.hr_popup_enterFrom{
+   @apply opacity-0 translate-y-1;
+}
+.hr_popup_enterTo{
+   @apply opacity-100 translate-y-0;
+}
+.hr_popup_leave{
+   @apply transition ease-in duration-150;
+}
+.hr_popup_leaveFrom{
+   @apply opacity-100 translate-y-0;
+}
+.hr_popup_leaveTo{
+   @apply opacity-0 translate-y-1;
+}
+#timeTableDates{
+    @apply relative w-full;
+}

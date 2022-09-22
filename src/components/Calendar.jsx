@@ -1,7 +1,7 @@
 import React, { Component, Fragment, useState, useEffect } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { DotsVerticalIcon } from "@heroicons/react/outline";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
+// import { DotsVerticalIcon } from "@heroicons/react/outline";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import {
     add,
     eachDayOfInterval,

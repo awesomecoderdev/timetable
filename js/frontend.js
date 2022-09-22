@@ -3096,7 +3096,7 @@ var Time = function Time() {
                               "aria-hidden": "true"
                             })
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-                            className: "calendar_h2",
+                            className: "calendar_h2 tac",
                             children: (0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(startCalendar, 'MMMM yyyy')
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                             onClick: nextMonth,

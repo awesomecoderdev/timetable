@@ -550,7 +550,9 @@ svg{
     width: 2.5rem;
   }
 }
-
+.tac{
+  text-align: center;
+}
 .hr_time_btn.disabled{
   pointer-events: none;
   background-color: rgb(100 116 139 / 0.5);

@@ -218,7 +218,7 @@ const Time = () => {
                                     <ChevronLeftIcon className="next_prev_icon" aria-hidden="true" />
                                   </button>
 
-                                  <span className="calendar_h2">
+                                  <span className="calendar_h2 tac">
                                     {format(startCalendar, 'MMMM yyyy')}
                                   </span>
                                   <button onClick={nextMonth} type="button" className="calendar_next_prev_btn">

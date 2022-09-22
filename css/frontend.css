@@ -302,10 +302,9 @@ svg{
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem;
+  /* gap: 1.25rem; */
   max-width: 1080px;
   margin: 2rem auto;
-  gap: 0;
 }
 @media (max-width: 1024px){
   .hours_wraper{
@@ -380,7 +379,7 @@ svg{
 }
 .hour_group{
   padding: 1rem;
-  margin: 0 0.51rem;
+  margin: 0.51rem;
   border-width: 1px;
   border-color: rgb(156 163 175 / 0.2);
   box-shadow:  0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -581,33 +580,27 @@ svg{
 }
 .hr_time_btn.a_selected{
 
-  background-color: rgb(202 138 4 / 1);
+  background-color: #ffcc00;
 
   color: rgb(255 255 255 / 1);
 }
 .hr_time_btn.a_selected:hover{
 
-  background-color: rgb(161 98 7 / 1);
+  background-color: #ffcc00;
 }
 .hr_time_btn.b_selected{
-
-  background-color: rgb(234 179 8 / 1);
-
+  background-color: #ffe888;
   color: rgb(255 255 255 / 1);
 }
 .hr_time_btn.b_selected:hover{
-
-  background-color: rgb(202 138 4 / 1);
+  background-color: #ffe888;
 }
 .hr_time_btn.h_selected{
-
-  background-color: rgb(148 163 184 / 1);
-
+  background-color: #cccccc;
   color: rgb(255 255 255 / 1);
 }
 .hr_time_btn.h_selected:hover{
-
-  background-color: rgb(100 116 139 / 1);
+  background-color:  #cccccc;
 }
 .hr_time{
   pointer-events: none;

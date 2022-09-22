@@ -53,6 +53,7 @@ const Time = () => {
     ? parse(startFrom, "d-M-yyyy", new Date())
     : startOfToday();
   const today = startFromNow > startOfToday() ? startFromNow : startOfToday();
+  const tday = startOfToday();
   const [selectedHour, setSelectedHour] = useState([]);
   const [selectedSchedule, setSelectedSchedule] = useState([]);
   const [currentHour, setCurrentHour] = useState(new Date());
@@ -249,15 +250,12 @@ const Time = () => {
                                           console.log('====================================');
                                           console.log(day);
                                           console.log('====================================');
-                                          // const dy = format(day, 'd-MM-yyyy');
-                                          // const redirect = `${window.location.origin}${window.location.pathname}?start=${dy}`;
-                                          // window.location = redirect;
                                         }}
                                         className={classNames(
                                           "calender_default_btn", // default class
-                                          isEqual(day,startOfToday()) && isToday(day) && 'current_date_btn', // set current date color
-                                          (startOfToday() > day) && 'previous_next_month_btn', // disable previous date to select
-                                          !isSameMonth(day, startOfToday()) && !(startOfToday() > day) && 'not_same_month', // set different month date color
+                                          isEqual(day,today) && 'current_date_btn', // set current date color
+                                          (tday > day) && 'previous_next_month_btn', // disable previous date to select
+                                          !isSameMonth(day, today) && !isEqual(day,today) && !(today > day) && 'not_same_month', // set different month date color
                                          )}
                                       >
                                         <time dateTime={format(day, 'yyyy-MM-dd')}>

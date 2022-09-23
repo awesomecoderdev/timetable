@@ -7,7 +7,7 @@ import { Menu, Transition, Tab, Popover } from "@headlessui/react";
 //   ChevronRightIcon,
 //   DocumentDuplicateIcon,
 // } from "@heroicons/react/solid";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
+import { ChevronLeftIcon, ChevronRightIcon, DocumentDuplicateIcon } from "@heroicons/react/20/solid";
 
 import {
   add,
@@ -469,7 +469,7 @@ const Time = () => {
                           <div className="relative_card">
                             <div className="hr_card_header">
                               <div className="hr_card_title">{table.title}</div>
-                              {/* <div className="hr_card_save ">
+                              <div className="hr_card_save ">
                               <Popover className="relative_card">
                                 {({ open }) => (
                                   <>
@@ -481,33 +481,17 @@ const Time = () => {
                                     >
                                       <DocumentDuplicateIcon className="icon_4 " />
                                     </Popover.Button>
-                                    <Transition
-                                      as={Fragment}
-                                      enter="hr_popup_enter"
-                                      enterFrom="hr_popup_enterFrom"
-                                      enterTo="hr_popup_enterTo"
-                                      leave="hr_popup_leave"
-                                      leaveFrom="hr_popup_leaveFrom"
-                                      leaveTo="hr_popup_leaveTo"
-                                    >
                                       <Popover.Panel className="hr_submit_popup">
                                         <div className="hr_popup_container">
                                           <div className="hr_popup_card">
                                             <div className="hr_popup_content">
                                               <div className="hr_popup_text">
                                                 <span>
-                                                  Tag :{" "}
-                                                  {format(today, "yyyy-MM-dd")}
+                                                  Start : { format(today, "yyyy-MM-dd") }
                                                 </span>
                                                 <br />
                                                 <span>
-                                                  Tag :{" "}
-                                                  {format(today, "yyyy-MM-dd")}
-                                                </span>
-                                                <br />
-                                                <span>
-                                                  Tag :{" "}
-                                                  {format(today, "yyyy-MM-dd")}
+                                                  End : { format(today, "yyyy-MM-dd") }
                                                 </span>
                                                 <br />
                                               </div>
@@ -539,11 +523,10 @@ const Time = () => {
                                           </div>
                                         </div>
                                       </Popover.Panel>
-                                    </Transition>
                                   </>
                                 )}
                               </Popover>
-                            </div> */}
+                            </div>
                             </div>
                             <div className="hr_btns_container">
                               {hours.map((hour, hrIndex) => {

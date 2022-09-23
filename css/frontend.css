@@ -685,7 +685,7 @@ svg{
   right: -50%;
   z-index: 10;
   margin-top: 0.75rem;
-  width: 100vw;
+  width: 20rem;
   max-width: 20rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -699,20 +699,22 @@ svg{
 @media (min-width: 768px){
   .hr_submit_popup{
     right: 0;
+    width: 15rem;
   }
 }
 @media (min-width: 1024px){
   .hr_submit_popup{
-    max-width: 20rem;
+    width: 14rem;
+    border: 1px solid #80808061;
+    border-radius: 0.5rem;
   }
 }
 .hr_popup_container{
   overflow: hidden;
   border-radius: 0.5rem;
-
   background-color: rgb(255 255 255 / 1);
   padding: 0.75rem;
-
+  max-width: 15rem;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 .hr_popup_card{

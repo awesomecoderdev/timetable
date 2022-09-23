@@ -2947,22 +2947,6 @@ var Time = function Time() {
       setStartCalendar = _useState12[1];
 
   var firstCurrentHour = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(currentHour, "MMM-yyyy", new Date());
-
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-      _useState14 = _slicedToArray(_useState13, 2),
-      selectedA = _useState14[0],
-      setSelectedA = _useState14[1];
-
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-      _useState16 = _slicedToArray(_useState15, 2),
-      selectedB = _useState16[0],
-      setSelectedB = _useState16[1];
-
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-      _useState18 = _slicedToArray(_useState17, 2),
-      selectedH = _useState18[0],
-      setSelectedH = _useState18[1];
-
   var days = (0,date_fns__WEBPACK_IMPORTED_MODULE_6__["default"])({
     start: (0,date_fns__WEBPACK_IMPORTED_MODULE_7__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_8__["default"])(startCalendar)),
     end: (0,date_fns__WEBPACK_IMPORTED_MODULE_9__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_10__["default"])(startCalendar))
@@ -3068,20 +3052,50 @@ var Time = function Time() {
     setStartCalendar(firstDayNextMonth);
   }
 
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState14 = _slicedToArray(_useState13, 2),
+      selectedA = _useState14[0],
+      setSelectedA = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState16 = _slicedToArray(_useState15, 2),
+      selectedB = _useState16[0],
+      setSelectedB = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState18 = _slicedToArray(_useState17, 2),
+      selectedH = _useState18[0],
+      setSelectedH = _useState18[1];
+
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState20 = _slicedToArray(_useState19, 2),
-      selectedAMultiSelect = _useState20[0],
-      setSelectedAMultiSelect = _useState20[1];
+      selectedAEnd = _useState20[0],
+      setSelectedAEnd = _useState20[1];
 
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState22 = _slicedToArray(_useState21, 2),
-      selectedBMultiSelect = _useState22[0],
-      setSelectedBMultiSelect = _useState22[1];
+      selectedBEnd = _useState22[0],
+      setSelectedBEnd = _useState22[1];
 
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState24 = _slicedToArray(_useState23, 2),
-      selectedHMultiSelect = _useState24[0],
-      setSelectedHMultiSelect = _useState24[1];
+      selectedHEnd = _useState24[0],
+      setSelectedHEnd = _useState24[1];
+
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState26 = _slicedToArray(_useState25, 2),
+      selectedAMultiSelect = _useState26[0],
+      setSelectedAMultiSelect = _useState26[1];
+
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState28 = _slicedToArray(_useState27, 2),
+      selectedBMultiSelect = _useState28[0],
+      setSelectedBMultiSelect = _useState28[1];
+
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState30 = _slicedToArray(_useState29, 2),
+      selectedHMultiSelect = _useState30[0],
+      setSelectedHMultiSelect = _useState30[1];
 
   var setMultiSelect = function setMultiSelect(e, hr, group) {
     var hourbtn = e.target;
@@ -3127,6 +3141,7 @@ var Time = function Time() {
           start: hr,
           end: selectedA
         });
+        setSelectedAEnd(selectedA < hr ? hr : selectedA);
         console.log("hours", hours);
         var selected = [];
         hours.map(function (hour, hrIndex) {
@@ -3180,6 +3195,7 @@ var Time = function Time() {
           end: selectedB
         });
 
+        setSelectedBEnd(selectedB < hr ? hr : selectedB);
         console.log("hours", _hours);
         var _selected = [];
 
@@ -3236,6 +3252,7 @@ var Time = function Time() {
           end: selectedH
         });
 
+        setSelectedHEnd(selectedH < hr ? hr : selectedH);
         console.log("hours", _hours2);
         var _selected2 = [];
 

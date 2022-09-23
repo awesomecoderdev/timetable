@@ -61,9 +61,6 @@ const Time = () => {
   const [startCalendar, setStartCalendar] = useState(today);
   const firstCurrentHour = parse(currentHour, "MMM-yyyy", new Date());
 
-  const [selectedA, setSelectedA] = useState(null);
-  const [selectedB, setSelectedB] = useState(null);
-  const [selectedH, setSelectedH] = useState(null);
 
   const days = eachDayOfInterval({
     start: startOfWeek(startOfMonth(startCalendar)),
@@ -171,6 +168,15 @@ const Time = () => {
     setStartCalendar(firstDayNextMonth);
   }
 
+
+  const [selectedA, setSelectedA] = useState(null);
+  const [selectedB, setSelectedB] = useState(null);
+  const [selectedH, setSelectedH] = useState(null);
+
+  const [selectedAEnd, setSelectedAEnd] = useState(null);
+  const [selectedBEnd, setSelectedBEnd] = useState(null);
+  const [selectedHEnd, setSelectedHEnd] = useState(null);
+
   const [selectedAMultiSelect, setSelectedAMultiSelect] = useState([]);
   const [selectedBMultiSelect, setSelectedBMultiSelect] = useState([]);
   const [selectedHMultiSelect, setSelectedHMultiSelect] = useState([]);
@@ -212,6 +218,7 @@ const Time = () => {
           }
         })
         const hours = selectedA < hr ? eachHourOfInterval({start: selectedA, end: hr}) : eachHourOfInterval({start: hr, end: selectedA});
+        setSelectedAEnd(selectedA < hr ? hr : selectedA );
         console.log("hours",hours);
 
         const selected = [];
@@ -255,6 +262,8 @@ const Time = () => {
           }
         })
         const hours = selectedB < hr ? eachHourOfInterval({start: selectedB, end: hr}) : eachHourOfInterval({start: hr, end: selectedB});
+        setSelectedBEnd(selectedB < hr ? hr : selectedB );
+
         console.log("hours",hours);
 
         const selected = [];
@@ -298,6 +307,7 @@ const Time = () => {
           }
         })
         const hours = selectedH < hr ? eachHourOfInterval({start: selectedH, end: hr}) : eachHourOfInterval({start: hr, end: selectedH});
+        setSelectedHEnd(selectedH < hr ? hr : selectedH );
         console.log("hours",hours);
 
         const selected = [];

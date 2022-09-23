@@ -97,9 +97,9 @@ const Time = () => {
   }
 
   useEffect(() => {
-    console.log("====================================");
-    console.log("selectedSchedule", selectedSchedule);
-    console.log("====================================");
+    // console.log("====================================");
+    // console.log("selectedSchedule", selectedSchedule);
+    // console.log("====================================");
   }, [selectedSchedule, setSchedule]);
 
   const processSubmit = () => {
@@ -171,15 +171,41 @@ const Time = () => {
     setStartCalendar(firstDayNextMonth);
   }
 
-  const setMultiSelect = (hr, group) => {
+  const setMultiSelect = (e, hr, group) => {
+    const hourbtn = e.target;
     const scheduleKey = `${group}-${format(hr,"MM-dd-yyyy")}-${getHours(hr)}`;
+    // console.log(scheduleKey);
     // setSelectedHour(scheduleKey);
     // setSchedule(scheduleKey);
 
-    if(group =="a"){
+    if(group == "a"){
       if(selectedA == null){
-        setSelectedA(hr)
+        if(hourbtn.classList.contains('a_selected')){
+          setSelectedA(null)
+          hourbtn.classList.remove("a_selected");
+        }else{
+          hourbtn.classList.add("a_selected");
+          setSelectedA(hr)
+        }
         console.log("selected selected A",selectedA);
+      }else if(isSameHour(selectedA,hr)){
+        document.querySelectorAll('.a_selected').forEach(e => {
+          if(e.classList.contains('a_selected')){
+            e.classList.remove("a_selected");
+          }
+        })
+        // setSelectedA(null)
+
+        if(hourbtn.classList.contains('a_selected')){
+          hourbtn.classList.remove("a_selected");
+        }else{
+          // hourbtn.classList.add("a_selected");
+          // setSelectedA(hr)
+        }
+
+        console.log('====================================');
+        console.log("ad",hr);
+        console.log('====================================');
       }else{
         const hours = eachHourOfInterval({
           start: selectedA,
@@ -190,23 +216,49 @@ const Time = () => {
         hours.map((hour, hrIndex) => {
           const schedule_key = `${group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`;
           const selectedScheduleKey = `${group}-${format(selectedA,"MM-dd-yyyy")}-${getHours(selectedA)}`;
-          if(scheduleKey != selectedScheduleKey){
-            setSelectedHour(schedule_key);
-            setSchedule(schedule_key);
-          }
+          document.getElementById(schedule_key).classList.add("a_selected");
         });
 
-        setSchedule(scheduleKey);
 
-        console.log("selected A",selectedA);
+        // if(hourbtn.classList.contains('a_selected')){
+        //   hourbtn.classList.remove("a_selected");
+        // }else{
+        //   hourbtn.classList.add("a_selected");
+        // }
       }
-    }else if(group =="b"){
-      setSelectedB(hr)
-      console.log("setSelectedB ",selectedB);
-    }else if(group =="h"){
-      setSelectedH(hr)
-      console.log("setSelectedH ",selectedH);
     }
+
+    // if(group =="a"){
+    //   if(selectedA == null){
+    //     setSelectedA(hr)
+    //     console.log("selected selected A",selectedA);
+    //   }else{
+    //     const hours = eachHourOfInterval({
+    //       start: selectedA,
+    //       end: hr,
+    //     });
+    //     console.log("hours",hours);
+
+    //     hours.map((hour, hrIndex) => {
+    //       const schedule_key = `${group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`;
+    //       const selectedScheduleKey = `${group}-${format(selectedA,"MM-dd-yyyy")}-${getHours(selectedA)}`;
+    //       if(scheduleKey != selectedScheduleKey){
+    //         setSelectedHour(schedule_key);
+    //         setSchedule(schedule_key);
+    //       }
+    //     });
+
+    //     setSchedule(scheduleKey);
+
+    //     console.log("selected A",selectedA);
+    //   }
+    // }else if(group =="b"){
+    //   setSelectedB(hr)
+    //   console.log("setSelectedB ",selectedB);
+    // }else if(group =="h"){
+    //   setSelectedH(hr)
+    //   console.log("setSelectedH ",selectedH);
+    // }
     // console.log('====================================');
     // console.log(`${hour} ${group}`);
     // console.log('====================================');
@@ -414,6 +466,12 @@ const Time = () => {
                                   <button
                                     key={hrIndex}
                                     type="button"
+                                    id={`${
+                                      table.group
+                                    }-${format(
+                                      hour,
+                                      "MM-dd-yyyy"
+                                    )}-${getHours(hour)}`}
                                     onClick={(e) => {
                                       const scheduleKey = `${
                                         table.group
@@ -433,7 +491,7 @@ const Time = () => {
                                       //   console.log("setSelectedH ",selectedH);
                                       // }
 
-                                      setMultiSelect(hour, table.group);
+                                      setMultiSelect(e,hour, table.group);
 
 
 

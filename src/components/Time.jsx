@@ -61,6 +61,10 @@ const Time = () => {
   const [startCalendar, setStartCalendar] = useState(today);
   const firstCurrentHour = parse(currentHour, "MMM-yyyy", new Date());
 
+  const [selectedA, setSelectedA] = useState(null);
+  const [selectedB, setSelectedB] = useState(null);
+  const [selectedH, setSelectedH] = useState(null);
+
   const days = eachDayOfInterval({
     start: startOfWeek(startOfMonth(startCalendar)),
     end: endOfWeek(endOfMonth(startCalendar)),
@@ -165,6 +169,51 @@ const Time = () => {
   function nextMonth() {
     const firstDayNextMonth = add(startCalendar, { months: 1 })
     setStartCalendar(firstDayNextMonth);
+  }
+
+  const setMultiSelect = (hr, group) => {
+    const scheduleKey = `${group}-${format(hr,"MM-dd-yyyy")}-${getHours(hr)}`;
+    // setSelectedHour(scheduleKey);
+    setSchedule(scheduleKey);
+
+    if(group =="a"){
+      if(selectedA == null){
+        setSelectedA(hr)
+        console.log("selected selected A",selectedA);
+      }else{
+        // const hours = eachHourOfInterval({
+        //   start: add(selectedA, {hours: +1}),
+        //   end: add(hr, {hours: -1}),
+        // });
+
+        const hours = eachHourOfInterval({
+          start: selectedA,
+          end: hr,
+        });
+        console.log("hours",hours);
+
+        hours.map((hour, hrIndex) => {
+          const schedule_key = `${group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`;
+          setSelectedHour(schedule_key);
+          setSchedule(schedule_key);
+        });
+
+
+
+
+
+        console.log("selected A",selectedA);
+      }
+    }else if(group =="b"){
+      setSelectedB(hr)
+      console.log("setSelectedB ",selectedB);
+    }else if(group =="h"){
+      setSelectedH(hr)
+      console.log("setSelectedH ",selectedH);
+    }
+    // console.log('====================================');
+    // console.log(`${hour} ${group}`);
+    // console.log('====================================');
   }
 
   return (
@@ -375,8 +424,24 @@ const Time = () => {
                                         hour,
                                         "MM-dd-yyyy"
                                       )}-${getHours(hour)}`;
-                                      setSelectedHour(scheduleKey);
-                                      setSchedule(scheduleKey);
+
+                                      // if(table.group =="a"){
+                                      //   setSelectedA(hour)
+                                      //   console.log("selected A",selectedA);
+                                      // }else  if(table.group =="b"){
+                                      //   setSelectedB(hour)
+                                      //   console.log("setSelectedB ",selectedB);
+                                      // }else if(table.group =="h"){
+                                      //   setSelectedH(hour)
+                                      //   console.log("setSelectedH ",selectedH);
+                                      // }
+
+                                      setMultiSelect(hour, table.group);
+
+
+
+                                      // setSelectedHour(scheduleKey);
+                                      // setSchedule(scheduleKey);
                                     }}
                                     className={classNames(
                                       "hr_time_btn", // default class

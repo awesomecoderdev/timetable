@@ -491,16 +491,13 @@ svg{
   width: auto;
 }
 .hr_card_save_btn{
-  margin-right: 1rem;
   border-radius: 9999px;
-
   background-color: rgb(56 189 248 / 1);
-  padding: 0.75rem;
+  padding: 0.45rem;
   font-family: 'Poppins', sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-size: 1.875rem;
+  line-height: 0.25rem;
   font-weight: 600;
-
   color: rgb(255 255 255 / 1);
 }
 .hr_card_save_btn.inactive{

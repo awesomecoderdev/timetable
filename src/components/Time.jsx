@@ -171,6 +171,10 @@ const Time = () => {
     setStartCalendar(firstDayNextMonth);
   }
 
+  const [selectedAMultiSelect, setSelectedAMultiSelect] = useState([]);
+  const [selectedBMultiSelect, setSelectedBMultiSelect] = useState([]);
+  const [selectedHMultiSelect, setSelectedHMultiSelect] = useState([]);
+
   const setMultiSelect = (e, hr, group) => {
     const hourbtn = e.target;
     const scheduleKey = `${group}-${format(hr,"MM-dd-yyyy")}-${getHours(hr)}`;
@@ -189,42 +193,117 @@ const Time = () => {
         }
         console.log("selected selected A",selectedA);
       }else if(isSameHour(selectedA,hr)){
+        if(hourbtn.classList.contains('a_selected')){
+          setSelectedA(null)
+          hourbtn.classList.remove("a_selected");
+        }else{
+          hourbtn.classList.add("a_selected");
+          setSelectedA(hr)
+        }
         document.querySelectorAll('.a_selected').forEach(e => {
           if(e.classList.contains('a_selected')){
             e.classList.remove("a_selected");
           }
         })
-        // setSelectedA(null)
-
-        if(hourbtn.classList.contains('a_selected')){
-          hourbtn.classList.remove("a_selected");
-        }else{
-          // hourbtn.classList.add("a_selected");
-          // setSelectedA(hr)
-        }
-
-        console.log('====================================');
-        console.log("ad",hr);
-        console.log('====================================');
       }else{
-        const hours = eachHourOfInterval({
-          start: selectedA,
-          end: hr,
-        });
+        document.querySelectorAll('.a_selected').forEach(e => {
+          if(e.classList.contains('a_selected')){
+            e.classList.remove("a_selected");
+          }
+        })
+        const hours = selectedA < hr ? eachHourOfInterval({start: selectedA, end: hr}) : eachHourOfInterval({start: hr, end: selectedA});
         console.log("hours",hours);
 
+        const selected = [];
         hours.map((hour, hrIndex) => {
           const schedule_key = `${group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`;
           const selectedScheduleKey = `${group}-${format(selectedA,"MM-dd-yyyy")}-${getHours(selectedA)}`;
+          selected.push(schedule_key);
           document.getElementById(schedule_key).classList.add("a_selected");
         });
+        setSelectedAMultiSelect(selected);
+      }
+    }else if(group == "b"){
+      if(selectedB == null){
+        if(hourbtn.classList.contains('b_selected')){
+          setSelectedB(null)
+          hourbtn.classList.remove("b_selected");
+        }else{
+          hourbtn.classList.add("b_selected");
+          setSelectedB(hr)
+        }
+        console.log("selected selected A",selectedB);
+      }else if(isSameHour(selectedB,hr)){
+        if(hourbtn.classList.contains('b_selected')){
+          setSelectedB(null)
+          hourbtn.classList.remove("b_selected");
+        }else{
+          hourbtn.classList.add("b_selected");
+          setSelectedB(hr)
+        }
+        document.querySelectorAll('.b_selected').forEach(e => {
+          if(e.classList.contains('b_selected')){
+            e.classList.remove("b_selected");
+          }
+        })
+      }else{
+        document.querySelectorAll('.b_selected').forEach(e => {
+          if(e.classList.contains('b_selected')){
+            e.classList.remove("b_selected");
+          }
+        })
+        const hours = selectedB < hr ? eachHourOfInterval({start: selectedB, end: hr}) : eachHourOfInterval({start: hr, end: selectedB});
+        console.log("hours",hours);
 
+        const selected = [];
+        hours.map((hour, hrIndex) => {
+          const schedule_key = `${group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`;
+          const selectedScheduleKey = `${group}-${format(selectedB,"MM-dd-yyyy")}-${getHours(selectedB)}`;
+          selected.push(schedule_key);
+          document.getElementById(schedule_key).classList.add("b_selected");
+        });
+        setSelectedBMultiSelect(selected);
+      }
+    }else if(group == "h"){
+      if(selectedH == null){
+        if(hourbtn.classList.contains('h_selected')){
+          setSelectedH(null)
+          hourbtn.classList.remove("h_selected");
+        }else{
+          hourbtn.classList.add("h_selected");
+          setSelectedH(hr)
+        }
+        console.log("selected selectedH",selectedH);
+      }else if(isSameHour(selectedH,hr)){
+        if(hourbtn.classList.contains('h_selected')){
+          setSelectedH(null)
+          hourbtn.classList.remove("h_selected");
+        }else{
+          hourbtn.classList.add("h_selected");
+          setSelectedH(hr)
+        }
+        document.querySelectorAll('.h_selected').forEach(e => {
+          if(e.classList.contains('h_selected')){
+            e.classList.remove("h_selected");
+          }
+        })
+      }else{
+        document.querySelectorAll('.h_selected').forEach(e => {
+          if(e.classList.contains('h_selected')){
+            e.classList.remove("h_selected");
+          }
+        })
+        const hours = selectedH < hr ? eachHourOfInterval({start: selectedH, end: hr}) : eachHourOfInterval({start: hr, end: selectedH});
+        console.log("hours",hours);
 
-        // if(hourbtn.classList.contains('a_selected')){
-        //   hourbtn.classList.remove("a_selected");
-        // }else{
-        //   hourbtn.classList.add("a_selected");
-        // }
+        const selected = [];
+        hours.map((hour, hrIndex) => {
+          const schedule_key = `${group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`;
+          const selectedScheduleKey = `${group}-${format(selectedH,"MM-dd-yyyy")}-${getHours(selectedH)}`;
+          selected.push(schedule_key);
+          document.getElementById(schedule_key).classList.add("h_selected");
+        });
+        setSelectedHMultiSelect(selected);
       }
     }
 
@@ -500,7 +579,7 @@ const Time = () => {
                                     }}
                                     className={classNames(
                                       "hr_time_btn", // default class
-                                      selectedSchedule.includes(
+                                      selectedAMultiSelect.includes(
                                         `${table.group}-${format(
                                           hour,
                                           "MM-dd-yyyy"
@@ -508,7 +587,7 @@ const Time = () => {
                                       ) &&
                                         table.group == "a" &&
                                         "a_selected", // disable previous date to select
-                                      selectedSchedule.includes(
+                                        selectedBMultiSelect.includes(
                                         `${table.group}-${format(
                                           hour,
                                           "MM-dd-yyyy"
@@ -516,7 +595,7 @@ const Time = () => {
                                       ) &&
                                         table.group == "b" &&
                                         "b_selected", // disable previous date to select
-                                      selectedSchedule.includes(
+                                        selectedHMultiSelect.includes(
                                         `${table.group}-${format(
                                           hour,
                                           "MM-dd-yyyy"

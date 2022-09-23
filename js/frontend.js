@@ -3068,6 +3068,21 @@ var Time = function Time() {
     setStartCalendar(firstDayNextMonth);
   }
 
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState20 = _slicedToArray(_useState19, 2),
+      selectedAMultiSelect = _useState20[0],
+      setSelectedAMultiSelect = _useState20[1];
+
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState22 = _slicedToArray(_useState21, 2),
+      selectedBMultiSelect = _useState22[0],
+      setSelectedBMultiSelect = _useState22[1];
+
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState24 = _slicedToArray(_useState23, 2),
+      selectedHMultiSelect = _useState24[0],
+      setSelectedHMultiSelect = _useState24[1];
+
   var setMultiSelect = function setMultiSelect(e, hr, group) {
     var hourbtn = e.target;
     var scheduleKey = "".concat(group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(hr, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hr)); // console.log(scheduleKey);
@@ -3086,36 +3101,149 @@ var Time = function Time() {
 
         console.log("selected selected A", selectedA);
       } else if ((0,date_fns__WEBPACK_IMPORTED_MODULE_14__["default"])(selectedA, hr)) {
+        if (hourbtn.classList.contains('a_selected')) {
+          setSelectedA(null);
+          hourbtn.classList.remove("a_selected");
+        } else {
+          hourbtn.classList.add("a_selected");
+          setSelectedA(hr);
+        }
+
         document.querySelectorAll('.a_selected').forEach(function (e) {
           if (e.classList.contains('a_selected')) {
             e.classList.remove("a_selected");
           }
-        }); // setSelectedA(null)
-
-        if (hourbtn.classList.contains('a_selected')) {
-          hourbtn.classList.remove("a_selected");
-        } else {// hourbtn.classList.add("a_selected");
-          // setSelectedA(hr)
-        }
-
-        console.log('====================================');
-        console.log("ad", hr);
-        console.log('====================================');
+        });
       } else {
-        var hours = (0,date_fns__WEBPACK_IMPORTED_MODULE_15__["default"])({
+        document.querySelectorAll('.a_selected').forEach(function (e) {
+          if (e.classList.contains('a_selected')) {
+            e.classList.remove("a_selected");
+          }
+        });
+        var hours = selectedA < hr ? (0,date_fns__WEBPACK_IMPORTED_MODULE_15__["default"])({
           start: selectedA,
           end: hr
+        }) : (0,date_fns__WEBPACK_IMPORTED_MODULE_15__["default"])({
+          start: hr,
+          end: selectedA
         });
         console.log("hours", hours);
+        var selected = [];
         hours.map(function (hour, hrIndex) {
           var schedule_key = "".concat(group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(hour, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour));
           var selectedScheduleKey = "".concat(group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(selectedA, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(selectedA));
+          selected.push(schedule_key);
           document.getElementById(schedule_key).classList.add("a_selected");
-        }); // if(hourbtn.classList.contains('a_selected')){
-        //   hourbtn.classList.remove("a_selected");
-        // }else{
-        //   hourbtn.classList.add("a_selected");
-        // }
+        });
+        setSelectedAMultiSelect(selected);
+      }
+    } else if (group == "b") {
+      if (selectedB == null) {
+        if (hourbtn.classList.contains('b_selected')) {
+          setSelectedB(null);
+          hourbtn.classList.remove("b_selected");
+        } else {
+          hourbtn.classList.add("b_selected");
+          setSelectedB(hr);
+        }
+
+        console.log("selected selected A", selectedB);
+      } else if ((0,date_fns__WEBPACK_IMPORTED_MODULE_14__["default"])(selectedB, hr)) {
+        if (hourbtn.classList.contains('b_selected')) {
+          setSelectedB(null);
+          hourbtn.classList.remove("b_selected");
+        } else {
+          hourbtn.classList.add("b_selected");
+          setSelectedB(hr);
+        }
+
+        document.querySelectorAll('.b_selected').forEach(function (e) {
+          if (e.classList.contains('b_selected')) {
+            e.classList.remove("b_selected");
+          }
+        });
+      } else {
+        document.querySelectorAll('.b_selected').forEach(function (e) {
+          if (e.classList.contains('b_selected')) {
+            e.classList.remove("b_selected");
+          }
+        });
+
+        var _hours = selectedB < hr ? (0,date_fns__WEBPACK_IMPORTED_MODULE_15__["default"])({
+          start: selectedB,
+          end: hr
+        }) : (0,date_fns__WEBPACK_IMPORTED_MODULE_15__["default"])({
+          start: hr,
+          end: selectedB
+        });
+
+        console.log("hours", _hours);
+        var _selected = [];
+
+        _hours.map(function (hour, hrIndex) {
+          var schedule_key = "".concat(group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(hour, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour));
+          var selectedScheduleKey = "".concat(group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(selectedB, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(selectedB));
+
+          _selected.push(schedule_key);
+
+          document.getElementById(schedule_key).classList.add("b_selected");
+        });
+
+        setSelectedBMultiSelect(_selected);
+      }
+    } else if (group == "h") {
+      if (selectedH == null) {
+        if (hourbtn.classList.contains('h_selected')) {
+          setSelectedH(null);
+          hourbtn.classList.remove("h_selected");
+        } else {
+          hourbtn.classList.add("h_selected");
+          setSelectedH(hr);
+        }
+
+        console.log("selected selectedH", selectedH);
+      } else if ((0,date_fns__WEBPACK_IMPORTED_MODULE_14__["default"])(selectedH, hr)) {
+        if (hourbtn.classList.contains('h_selected')) {
+          setSelectedH(null);
+          hourbtn.classList.remove("h_selected");
+        } else {
+          hourbtn.classList.add("h_selected");
+          setSelectedH(hr);
+        }
+
+        document.querySelectorAll('.h_selected').forEach(function (e) {
+          if (e.classList.contains('h_selected')) {
+            e.classList.remove("h_selected");
+          }
+        });
+      } else {
+        document.querySelectorAll('.h_selected').forEach(function (e) {
+          if (e.classList.contains('h_selected')) {
+            e.classList.remove("h_selected");
+          }
+        });
+
+        var _hours2 = selectedH < hr ? (0,date_fns__WEBPACK_IMPORTED_MODULE_15__["default"])({
+          start: selectedH,
+          end: hr
+        }) : (0,date_fns__WEBPACK_IMPORTED_MODULE_15__["default"])({
+          start: hr,
+          end: selectedH
+        });
+
+        console.log("hours", _hours2);
+        var _selected2 = [];
+
+        _hours2.map(function (hour, hrIndex) {
+          var schedule_key = "".concat(group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(hour, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour));
+          var selectedScheduleKey = "".concat(group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(selectedH, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(selectedH));
+
+          _selected2.push(schedule_key);
+
+          document.getElementById(schedule_key).classList.add("h_selected");
+        });
+
+        setSelectedHMultiSelect(_selected2);
       }
     } // if(group =="a"){
     //   if(selectedA == null){
@@ -3324,9 +3452,9 @@ var Time = function Time() {
                               // setSchedule(scheduleKey);
                             },
                             className: classNames("hr_time_btn", // default class
-                            selectedSchedule.includes("".concat(table.group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(hour, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour))) && table.group == "a" && "a_selected", // disable previous date to select
-                            selectedSchedule.includes("".concat(table.group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(hour, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour))) && table.group == "b" && "b_selected", // disable previous date to select
-                            selectedSchedule.includes("".concat(table.group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(hour, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour))) && table.group == "h" && "h_selected", // disable previous date to select
+                            selectedAMultiSelect.includes("".concat(table.group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(hour, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour))) && table.group == "a" && "a_selected", // disable previous date to select
+                            selectedBMultiSelect.includes("".concat(table.group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(hour, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour))) && table.group == "b" && "b_selected", // disable previous date to select
+                            selectedHMultiSelect.includes("".concat(table.group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(hour, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour))) && table.group == "h" && "h_selected", // disable previous date to select
                             haveSchedule && table.group == "a" && "a", haveSchedule && table.group == "b" && "b", haveSchedule && table.group == "h" && "h", // !(currentHour > hour) && !isSameHour(currentHour,hour) && 'hover:bg-gray-300', // hover to normal time item
                             !(0,date_fns__WEBPACK_IMPORTED_MODULE_14__["default"])(currentHour, hour) && currentHour > hour && "disabled", // disable previous date to select
                             (currentHour <= hour || (0,date_fns__WEBPACK_IMPORTED_MODULE_14__["default"])(currentHour, hour)) && !haveSchedule && !selectedSchedule.includes("".concat(table.group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(hour, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour))) && "normal" // hover to normal time item

@@ -3133,7 +3133,10 @@ var Time = function Time() {
           var schedule_key = "".concat(group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(hour, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour));
           var selectedScheduleKey = "".concat(group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(selectedA, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(selectedA));
           selected.push(schedule_key);
-          document.getElementById(schedule_key).classList.add("a_selected");
+
+          if (document.getElementById(schedule_key)) {
+            document.getElementById(schedule_key).classList.add("a_selected");
+          }
         });
         setSelectedAMultiSelect(selected);
       }
@@ -3147,7 +3150,7 @@ var Time = function Time() {
           setSelectedB(hr);
         }
 
-        console.log("selected selected A", selectedB);
+        console.log("selected selected B", selectedB);
       } else if ((0,date_fns__WEBPACK_IMPORTED_MODULE_14__["default"])(selectedB, hr)) {
         if (hourbtn.classList.contains('b_selected')) {
           setSelectedB(null);
@@ -3186,7 +3189,9 @@ var Time = function Time() {
 
           _selected.push(schedule_key);
 
-          document.getElementById(schedule_key).classList.add("b_selected");
+          if (document.getElementById(schedule_key)) {
+            document.getElementById(schedule_key).classList.add("b_selected");
+          }
         });
 
         setSelectedBMultiSelect(_selected);
@@ -3240,7 +3245,9 @@ var Time = function Time() {
 
           _selected2.push(schedule_key);
 
-          document.getElementById(schedule_key).classList.add("h_selected");
+          if (document.getElementById(schedule_key)) {
+            document.getElementById(schedule_key).classList.add("h_selected");
+          }
         });
 
         setSelectedHMultiSelect(_selected2);

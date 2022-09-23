@@ -219,7 +219,9 @@ const Time = () => {
           const schedule_key = `${group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`;
           const selectedScheduleKey = `${group}-${format(selectedA,"MM-dd-yyyy")}-${getHours(selectedA)}`;
           selected.push(schedule_key);
-          document.getElementById(schedule_key).classList.add("a_selected");
+          if(document.getElementById(schedule_key)){
+            document.getElementById(schedule_key).classList.add("a_selected");
+          }
         });
         setSelectedAMultiSelect(selected);
       }
@@ -232,7 +234,7 @@ const Time = () => {
           hourbtn.classList.add("b_selected");
           setSelectedB(hr)
         }
-        console.log("selected selected A",selectedB);
+        console.log("selected selected B",selectedB);
       }else if(isSameHour(selectedB,hr)){
         if(hourbtn.classList.contains('b_selected')){
           setSelectedB(null)
@@ -260,7 +262,9 @@ const Time = () => {
           const schedule_key = `${group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`;
           const selectedScheduleKey = `${group}-${format(selectedB,"MM-dd-yyyy")}-${getHours(selectedB)}`;
           selected.push(schedule_key);
-          document.getElementById(schedule_key).classList.add("b_selected");
+          if(document.getElementById(schedule_key)){
+            document.getElementById(schedule_key).classList.add("b_selected");
+          }
         });
         setSelectedBMultiSelect(selected);
       }
@@ -301,7 +305,9 @@ const Time = () => {
           const schedule_key = `${group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`;
           const selectedScheduleKey = `${group}-${format(selectedH,"MM-dd-yyyy")}-${getHours(selectedH)}`;
           selected.push(schedule_key);
-          document.getElementById(schedule_key).classList.add("h_selected");
+          if(document.getElementById(schedule_key)){
+            document.getElementById(schedule_key).classList.add("h_selected");
+          }
         });
         setSelectedHMultiSelect(selected);
       }

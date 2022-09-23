@@ -52,7 +52,7 @@ const Time = () => {
   const startFromNow = startFrom
     ? parse(startFrom, "d-M-yyyy", new Date())
     : startOfToday();
-  const today = startFromNow > startOfToday() ? startFromNow : startOfToday();
+  const [today,setToday] =  useState(startFromNow > startOfToday() ? startFromNow : startOfToday());
   const tday = startOfToday();
   const [selectedHour, setSelectedHour] = useState([]);
   const [selectedSchedule, setSelectedSchedule] = useState([]);
@@ -174,18 +174,13 @@ const Time = () => {
   const setMultiSelect = (hr, group) => {
     const scheduleKey = `${group}-${format(hr,"MM-dd-yyyy")}-${getHours(hr)}`;
     // setSelectedHour(scheduleKey);
-    setSchedule(scheduleKey);
+    // setSchedule(scheduleKey);
 
     if(group =="a"){
       if(selectedA == null){
         setSelectedA(hr)
         console.log("selected selected A",selectedA);
       }else{
-        // const hours = eachHourOfInterval({
-        //   start: add(selectedA, {hours: +1}),
-        //   end: add(hr, {hours: -1}),
-        // });
-
         const hours = eachHourOfInterval({
           start: selectedA,
           end: hr,
@@ -194,13 +189,14 @@ const Time = () => {
 
         hours.map((hour, hrIndex) => {
           const schedule_key = `${group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`;
-          setSelectedHour(schedule_key);
-          setSchedule(schedule_key);
+          const selectedScheduleKey = `${group}-${format(selectedA,"MM-dd-yyyy")}-${getHours(selectedA)}`;
+          if(scheduleKey != selectedScheduleKey){
+            setSelectedHour(schedule_key);
+            setSchedule(schedule_key);
+          }
         });
 
-
-
-
+        setSchedule(scheduleKey);
 
         console.log("selected A",selectedA);
       }
@@ -277,6 +273,7 @@ const Time = () => {
                                           console.log('====================================');
                                           console.log(day);
                                           console.log('====================================');
+                                          setToday(day)
                                         }}
                                         className={classNames(
                                           "calender_default_btn", // default class

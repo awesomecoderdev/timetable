@@ -34,6 +34,7 @@ import {
   startOfWeek,
   endOfWeek,
   startOfMonth,
+  isValid,
 } from "date-fns";
 import axios from "axios";
 import { scheduleJson } from "./Data";
@@ -66,6 +67,7 @@ const Time = () => {
   const [currentDay, setCurrentDay] = useState(today);
   const [startCalendar, setStartCalendar] = useState(today);
   const firstCurrentHour = parse(currentHour, "MMM-yyyy", new Date());
+  const [showPopup, setShowPopup] = useState(false);
 
   const days = eachDayOfInterval({
     start: startOfWeek(startOfMonth(startCalendar)),
@@ -156,10 +158,12 @@ const Time = () => {
   ];
 
   const processNeinAction = () => {
+    setShowPopup(false);
     alert("cancled");
   };
 
   const processJaAction = () => {
+    setShowPopup(false);
     alert("Submited");
   };
 
@@ -185,7 +189,12 @@ const Time = () => {
   const [selectedBMultiSelect, setSelectedBMultiSelect] = useState([]);
   const [selectedHMultiSelect, setSelectedHMultiSelect] = useState([]);
 
+  const [selectedFrom, setSelectedFrom] = useState(null);
+  const [selectedTo, setSelectedTo] = useState(null);
+  const [selectedGroup, setSelectedGroup] = useState(null);
+
   const setMultiSelect = (e, hr, group) => {
+    setSelectedGroup(group);
     const hourbtn = e.target;
     const scheduleKey = `${group}-${format(hr, "MM-dd-yyyy")}-${getHours(hr)}`;
     // console.log(scheduleKey);
@@ -196,18 +205,22 @@ const Time = () => {
       if (selectedA == null) {
         if (hourbtn.classList.contains("a_selected")) {
           setSelectedA(null);
+          setSelectedFrom(null)
           hourbtn.classList.remove("a_selected");
         } else {
           hourbtn.classList.add("a_selected");
           setSelectedA(hr);
+          setSelectedFrom(hr)
         }
         console.log("selected selected A", selectedA);
       } else if (isSameHour(selectedA, hr)) {
         if (hourbtn.classList.contains("a_selected")) {
+          setSelectedFrom(null)
           setSelectedA(null);
           hourbtn.classList.remove("a_selected");
         } else {
           hourbtn.classList.add("a_selected");
+          setSelectedFrom(hr)
           setSelectedA(hr);
         }
         document.querySelectorAll(".a_selected").forEach((e) => {
@@ -227,6 +240,10 @@ const Time = () => {
             : eachHourOfInterval({ start: hr, end: selectedA });
         setSelectedAEnd(selectedA < hr ? hr : selectedA);
         console.log("hours", hours);
+
+        // popup
+        setSelectedTo(selectedA < hr ? hr : selectedA);
+        setShowPopup(true);
 
         const selected = [];
         hours.map((hour, hrIndex) => {
@@ -249,18 +266,22 @@ const Time = () => {
       if (selectedB == null) {
         if (hourbtn.classList.contains("b_selected")) {
           setSelectedB(null);
+          setSelectedFrom(null)
           hourbtn.classList.remove("b_selected");
         } else {
           hourbtn.classList.add("b_selected");
+          setSelectedFrom(hr)
           setSelectedB(hr);
         }
         console.log("selected selected B", selectedB);
       } else if (isSameHour(selectedB, hr)) {
         if (hourbtn.classList.contains("b_selected")) {
+          setSelectedFrom(null)
           setSelectedB(null);
           hourbtn.classList.remove("b_selected");
         } else {
           hourbtn.classList.add("b_selected");
+          setSelectedFrom(hr)
           setSelectedB(hr);
         }
         document.querySelectorAll(".b_selected").forEach((e) => {
@@ -281,6 +302,9 @@ const Time = () => {
         setSelectedBEnd(selectedB < hr ? hr : selectedB);
 
         console.log("hours", hours);
+        // popup
+        setSelectedTo(selectedB < hr ? hr : selectedB);
+        setShowPopup(true);
 
         const selected = [];
         hours.map((hour, hrIndex) => {
@@ -303,19 +327,23 @@ const Time = () => {
       if (selectedH == null) {
         if (hourbtn.classList.contains("h_selected")) {
           setSelectedH(null);
+          setSelectedFrom(null)
           hourbtn.classList.remove("h_selected");
         } else {
           hourbtn.classList.add("h_selected");
           setSelectedH(hr);
+          setSelectedFrom(hr)
         }
         console.log("selected selectedH", selectedH);
       } else if (isSameHour(selectedH, hr)) {
         if (hourbtn.classList.contains("h_selected")) {
           setSelectedH(null);
+          setSelectedFrom(null)
           hourbtn.classList.remove("h_selected");
         } else {
           hourbtn.classList.add("h_selected");
           setSelectedH(hr);
+          setSelectedFrom(hr)
         }
         document.querySelectorAll(".h_selected").forEach((e) => {
           if (e.classList.contains("h_selected")) {
@@ -334,6 +362,9 @@ const Time = () => {
             : eachHourOfInterval({ start: hr, end: selectedH });
         setSelectedHEnd(selectedH < hr ? hr : selectedH);
         console.log("hours", hours);
+        // popup
+        setSelectedTo(selectedH < hr ? hr : selectedH);
+        setShowPopup(true);
 
         const selected = [];
         hours.map((hour, hrIndex) => {
@@ -354,40 +385,6 @@ const Time = () => {
       }
     }
 
-    // if(group =="a"){
-    //   if(selectedA == null){
-    //     setSelectedA(hr)
-    //     console.log("selected selected A",selectedA);
-    //   }else{
-    //     const hours = eachHourOfInterval({
-    //       start: selectedA,
-    //       end: hr,
-    //     });
-    //     console.log("hours",hours);
-
-    //     hours.map((hour, hrIndex) => {
-    //       const schedule_key = `${group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`;
-    //       const selectedScheduleKey = `${group}-${format(selectedA,"MM-dd-yyyy")}-${getHours(selectedA)}`;
-    //       if(scheduleKey != selectedScheduleKey){
-    //         setSelectedHour(schedule_key);
-    //         setSchedule(schedule_key);
-    //       }
-    //     });
-
-    //     setSchedule(scheduleKey);
-
-    //     console.log("selected A",selectedA);
-    //   }
-    // }else if(group =="b"){
-    //   setSelectedB(hr)
-    //   console.log("setSelectedB ",selectedB);
-    // }else if(group =="h"){
-    //   setSelectedH(hr)
-    //   console.log("setSelectedH ",selectedH);
-    // }
-    // console.log('====================================');
-    // console.log(`${hour} ${group}`);
-    // console.log('====================================');
   };
 
   return (
@@ -500,6 +497,55 @@ const Time = () => {
               </>
             )}
           </Popover>
+        </div>
+      </div>
+
+      <div className={`popup ${showPopup ? "show" : "" } `}>
+        <div className="popup_container">
+          <div className="popup_content">
+              <div className="hr_popup_card">
+                <div className="hr_popup_content">
+                  <div className="hr_popup_text">
+                    <span>
+                      Group : {selectedGroup == "a" ? "A-Dienst" : ""+selectedGroup == "b" ? "B-Dienst" : ""+selectedGroup == "h" ? "H-Dienst" : ""}
+                    </span>
+                    <br />
+                    <span>
+                      From : {isValid(selectedFrom) ? `${format(selectedFrom, "yyyy-MM-dd")} ${getHours(selectedFrom) < 10 ? "0" + getHours(selectedFrom) + ":00" : getHours(selectedFrom) + ":00"}` : ""}
+                    </span>
+                    <br />
+                    <span>
+                      To : {isValid(selectedTo) ? `${format(selectedTo, "yyyy-MM-dd")} ${getHours(selectedTo) < 10 ? "0" + getHours(selectedTo) + ":00" : getHours(selectedTo) + ":00"}` : ""}
+                    </span>
+                    <br />
+                  </div>
+                  <select
+                    name=""
+                    id=""
+                    className="hr_popup_select"
+                  >
+                    <option value="">Demo 1</option>
+                    <option value="">Demo 2</option>
+                  </select>
+                </div>
+                <div className="hr_popup_footer_container">
+                  <div className="hr_footer_btns">
+                    <button
+                      onClick={processNeinAction}
+                      className="hr_popup_cancel_btn"
+                    >
+                      Nein
+                    </button>
+                    <button
+                      onClick={processJaAction}
+                      className="hr_popup_ok_btn"
+                    >
+                      Ja
+                    </button>
+                  </div>
+                </div>
+              </div>
+          </div>
         </div>
       </div>
 

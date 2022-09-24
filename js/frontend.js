@@ -3489,19 +3489,20 @@ var Time = function Time() {
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                         className: "hr_btns_container",
                         children: hours.map(function (hour, hrIndex) {
-                          var haveSchedule = false;
-
-                          if (scheduleFromDatabase.length > 0 || scheduleFromDatabase != undefined) {
-                            scheduleFromDatabase.filter(function (hr) {
-                              if ((0,date_fns__WEBPACK_IMPORTED_MODULE_14__["default"])(hr, hour)) {
-                                // console.log(hour);
-                                haveSchedule = true;
-                                return true;
-                              }
-
-                              return false;
-                            });
-                          }
+                          var haveSchedule = false; // console.log("scheduleFromDatabase",scheduleFromDatabase);
+                          // if (
+                          //   scheduleFromDatabase.length > 0 ||
+                          //   scheduleFromDatabase != undefined
+                          // ) {
+                          //   scheduleFromDatabase.filter((hr) => {
+                          //     if (isSameHour(hr, hour)) {
+                          //       // console.log(hour);
+                          //       haveSchedule = true;
+                          //       return true;
+                          //     }
+                          //     return false;
+                          //   });
+                          // }
 
                           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                             type: "button",

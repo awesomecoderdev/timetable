@@ -674,5 +674,4 @@ const Time = () => {
     </Fragment>
   );
 };
-
 export default Time;

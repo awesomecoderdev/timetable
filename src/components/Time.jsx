@@ -7,7 +7,11 @@ import { Menu, Transition, Tab, Popover } from "@headlessui/react";
 //   ChevronRightIcon,
 //   DocumentDuplicateIcon,
 // } from "@heroicons/react/solid";
-import { ChevronLeftIcon, ChevronRightIcon, DocumentDuplicateIcon } from "@heroicons/react/20/solid";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  DocumentDuplicateIcon,
+} from "@heroicons/react/20/solid";
 
 import {
   add,
@@ -52,7 +56,9 @@ const Time = () => {
   const startFromNow = startFrom
     ? parse(startFrom, "d-M-yyyy", new Date())
     : startOfToday();
-  const [today,setToday] =  useState(startFromNow > startOfToday() ? startFromNow : startOfToday());
+  const [today, setToday] = useState(
+    startFromNow > startOfToday() ? startFromNow : startOfToday()
+  );
   const tday = startOfToday();
   const [selectedHour, setSelectedHour] = useState([]);
   const [selectedSchedule, setSelectedSchedule] = useState([]);
@@ -61,11 +67,10 @@ const Time = () => {
   const [startCalendar, setStartCalendar] = useState(today);
   const firstCurrentHour = parse(currentHour, "MMM-yyyy", new Date());
 
-
   const days = eachDayOfInterval({
     start: startOfWeek(startOfMonth(startCalendar)),
     end: endOfWeek(endOfMonth(startCalendar)),
-  })
+  });
 
   const currentWeek = eachDayOfInterval({
     start: startOfWeek(today),
@@ -160,14 +165,13 @@ const Time = () => {
 
   function previousMonth() {
     console.log("previousMonth");
-    const firstDayNextMonth = add(startCalendar, { months: -1 })
-    setStartCalendar(firstDayNextMonth)
-  }
-  function nextMonth() {
-    const firstDayNextMonth = add(startCalendar, { months: 1 })
+    const firstDayNextMonth = add(startCalendar, { months: -1 });
     setStartCalendar(firstDayNextMonth);
   }
-
+  function nextMonth() {
+    const firstDayNextMonth = add(startCalendar, { months: 1 });
+    setStartCalendar(firstDayNextMonth);
+  }
 
   const [selectedA, setSelectedA] = useState(null);
   const [selectedB, setSelectedB] = useState(null);
@@ -183,139 +187,166 @@ const Time = () => {
 
   const setMultiSelect = (e, hr, group) => {
     const hourbtn = e.target;
-    const scheduleKey = `${group}-${format(hr,"MM-dd-yyyy")}-${getHours(hr)}`;
+    const scheduleKey = `${group}-${format(hr, "MM-dd-yyyy")}-${getHours(hr)}`;
     // console.log(scheduleKey);
     // setSelectedHour(scheduleKey);
     // setSchedule(scheduleKey);
 
-    if(group == "a"){
-      if(selectedA == null){
-        if(hourbtn.classList.contains('a_selected')){
-          setSelectedA(null)
+    if (group == "a") {
+      if (selectedA == null) {
+        if (hourbtn.classList.contains("a_selected")) {
+          setSelectedA(null);
           hourbtn.classList.remove("a_selected");
-        }else{
+        } else {
           hourbtn.classList.add("a_selected");
-          setSelectedA(hr)
+          setSelectedA(hr);
         }
-        console.log("selected selected A",selectedA);
-      }else if(isSameHour(selectedA,hr)){
-        if(hourbtn.classList.contains('a_selected')){
-          setSelectedA(null)
+        console.log("selected selected A", selectedA);
+      } else if (isSameHour(selectedA, hr)) {
+        if (hourbtn.classList.contains("a_selected")) {
+          setSelectedA(null);
           hourbtn.classList.remove("a_selected");
-        }else{
+        } else {
           hourbtn.classList.add("a_selected");
-          setSelectedA(hr)
+          setSelectedA(hr);
         }
-        document.querySelectorAll('.a_selected').forEach(e => {
-          if(e.classList.contains('a_selected')){
+        document.querySelectorAll(".a_selected").forEach((e) => {
+          if (e.classList.contains("a_selected")) {
             e.classList.remove("a_selected");
           }
-        })
-      }else{
-        document.querySelectorAll('.a_selected').forEach(e => {
-          if(e.classList.contains('a_selected')){
+        });
+      } else {
+        document.querySelectorAll(".a_selected").forEach((e) => {
+          if (e.classList.contains("a_selected")) {
             e.classList.remove("a_selected");
           }
-        })
-        const hours = selectedA < hr ? eachHourOfInterval({start: selectedA, end: hr}) : eachHourOfInterval({start: hr, end: selectedA});
-        setSelectedAEnd(selectedA < hr ? hr : selectedA );
-        console.log("hours",hours);
+        });
+        const hours =
+          selectedA < hr
+            ? eachHourOfInterval({ start: selectedA, end: hr })
+            : eachHourOfInterval({ start: hr, end: selectedA });
+        setSelectedAEnd(selectedA < hr ? hr : selectedA);
+        console.log("hours", hours);
 
         const selected = [];
         hours.map((hour, hrIndex) => {
-          const schedule_key = `${group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`;
-          const selectedScheduleKey = `${group}-${format(selectedA,"MM-dd-yyyy")}-${getHours(selectedA)}`;
+          const schedule_key = `${group}-${format(
+            hour,
+            "MM-dd-yyyy"
+          )}-${getHours(hour)}`;
+          const selectedScheduleKey = `${group}-${format(
+            selectedA,
+            "MM-dd-yyyy"
+          )}-${getHours(selectedA)}`;
           selected.push(schedule_key);
-          if(document.getElementById(schedule_key)){
+          if (document.getElementById(schedule_key)) {
             document.getElementById(schedule_key).classList.add("a_selected");
           }
         });
         setSelectedAMultiSelect(selected);
       }
-    }else if(group == "b"){
-      if(selectedB == null){
-        if(hourbtn.classList.contains('b_selected')){
-          setSelectedB(null)
+    } else if (group == "b") {
+      if (selectedB == null) {
+        if (hourbtn.classList.contains("b_selected")) {
+          setSelectedB(null);
           hourbtn.classList.remove("b_selected");
-        }else{
+        } else {
           hourbtn.classList.add("b_selected");
-          setSelectedB(hr)
+          setSelectedB(hr);
         }
-        console.log("selected selected B",selectedB);
-      }else if(isSameHour(selectedB,hr)){
-        if(hourbtn.classList.contains('b_selected')){
-          setSelectedB(null)
+        console.log("selected selected B", selectedB);
+      } else if (isSameHour(selectedB, hr)) {
+        if (hourbtn.classList.contains("b_selected")) {
+          setSelectedB(null);
           hourbtn.classList.remove("b_selected");
-        }else{
+        } else {
           hourbtn.classList.add("b_selected");
-          setSelectedB(hr)
+          setSelectedB(hr);
         }
-        document.querySelectorAll('.b_selected').forEach(e => {
-          if(e.classList.contains('b_selected')){
+        document.querySelectorAll(".b_selected").forEach((e) => {
+          if (e.classList.contains("b_selected")) {
             e.classList.remove("b_selected");
           }
-        })
-      }else{
-        document.querySelectorAll('.b_selected').forEach(e => {
-          if(e.classList.contains('b_selected')){
+        });
+      } else {
+        document.querySelectorAll(".b_selected").forEach((e) => {
+          if (e.classList.contains("b_selected")) {
             e.classList.remove("b_selected");
           }
-        })
-        const hours = selectedB < hr ? eachHourOfInterval({start: selectedB, end: hr}) : eachHourOfInterval({start: hr, end: selectedB});
-        setSelectedBEnd(selectedB < hr ? hr : selectedB );
+        });
+        const hours =
+          selectedB < hr
+            ? eachHourOfInterval({ start: selectedB, end: hr })
+            : eachHourOfInterval({ start: hr, end: selectedB });
+        setSelectedBEnd(selectedB < hr ? hr : selectedB);
 
-        console.log("hours",hours);
+        console.log("hours", hours);
 
         const selected = [];
         hours.map((hour, hrIndex) => {
-          const schedule_key = `${group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`;
-          const selectedScheduleKey = `${group}-${format(selectedB,"MM-dd-yyyy")}-${getHours(selectedB)}`;
+          const schedule_key = `${group}-${format(
+            hour,
+            "MM-dd-yyyy"
+          )}-${getHours(hour)}`;
+          const selectedScheduleKey = `${group}-${format(
+            selectedB,
+            "MM-dd-yyyy"
+          )}-${getHours(selectedB)}`;
           selected.push(schedule_key);
-          if(document.getElementById(schedule_key)){
+          if (document.getElementById(schedule_key)) {
             document.getElementById(schedule_key).classList.add("b_selected");
           }
         });
         setSelectedBMultiSelect(selected);
       }
-    }else if(group == "h"){
-      if(selectedH == null){
-        if(hourbtn.classList.contains('h_selected')){
-          setSelectedH(null)
+    } else if (group == "h") {
+      if (selectedH == null) {
+        if (hourbtn.classList.contains("h_selected")) {
+          setSelectedH(null);
           hourbtn.classList.remove("h_selected");
-        }else{
+        } else {
           hourbtn.classList.add("h_selected");
-          setSelectedH(hr)
+          setSelectedH(hr);
         }
-        console.log("selected selectedH",selectedH);
-      }else if(isSameHour(selectedH,hr)){
-        if(hourbtn.classList.contains('h_selected')){
-          setSelectedH(null)
+        console.log("selected selectedH", selectedH);
+      } else if (isSameHour(selectedH, hr)) {
+        if (hourbtn.classList.contains("h_selected")) {
+          setSelectedH(null);
           hourbtn.classList.remove("h_selected");
-        }else{
+        } else {
           hourbtn.classList.add("h_selected");
-          setSelectedH(hr)
+          setSelectedH(hr);
         }
-        document.querySelectorAll('.h_selected').forEach(e => {
-          if(e.classList.contains('h_selected')){
+        document.querySelectorAll(".h_selected").forEach((e) => {
+          if (e.classList.contains("h_selected")) {
             e.classList.remove("h_selected");
           }
-        })
-      }else{
-        document.querySelectorAll('.h_selected').forEach(e => {
-          if(e.classList.contains('h_selected')){
+        });
+      } else {
+        document.querySelectorAll(".h_selected").forEach((e) => {
+          if (e.classList.contains("h_selected")) {
             e.classList.remove("h_selected");
           }
-        })
-        const hours = selectedH < hr ? eachHourOfInterval({start: selectedH, end: hr}) : eachHourOfInterval({start: hr, end: selectedH});
-        setSelectedHEnd(selectedH < hr ? hr : selectedH );
-        console.log("hours",hours);
+        });
+        const hours =
+          selectedH < hr
+            ? eachHourOfInterval({ start: selectedH, end: hr })
+            : eachHourOfInterval({ start: hr, end: selectedH });
+        setSelectedHEnd(selectedH < hr ? hr : selectedH);
+        console.log("hours", hours);
 
         const selected = [];
         hours.map((hour, hrIndex) => {
-          const schedule_key = `${group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`;
-          const selectedScheduleKey = `${group}-${format(selectedH,"MM-dd-yyyy")}-${getHours(selectedH)}`;
+          const schedule_key = `${group}-${format(
+            hour,
+            "MM-dd-yyyy"
+          )}-${getHours(hour)}`;
+          const selectedScheduleKey = `${group}-${format(
+            selectedH,
+            "MM-dd-yyyy"
+          )}-${getHours(selectedH)}`;
           selected.push(schedule_key);
-          if(document.getElementById(schedule_key)){
+          if (document.getElementById(schedule_key)) {
             document.getElementById(schedule_key).classList.add("h_selected");
           }
         });
@@ -357,89 +388,114 @@ const Time = () => {
     // console.log('====================================');
     // console.log(`${hour} ${group}`);
     // console.log('====================================');
-  }
+  };
 
   return (
     <Fragment>
       <div className="container">
         <div className="week_container">
-
           <Popover className="pos_relative">
             {({ open }) => (
               <>
-              <button className={`active week_item`} type="button">
-                Week {format(today, "I")}
-              </button>
+                <button className={`active week_item`} type="button">
+                  Week {format(today, "I")}
+                </button>
                 <Popover.Button
                   // onClick={processSubmit}
                   className={`week_item`}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" color="currentColor">
-                      <path d="M21 20V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2zM9 18H7v-2h2v2zm0-4H7v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm2-5H5V7h14v2z"></path>
-                    </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    color="currentColor"
+                  >
+                    <path d="M21 20V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2zM9 18H7v-2h2v2zm0-4H7v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm2-5H5V7h14v2z"></path>
+                  </svg>
                 </Popover.Button>
                 <Popover.Panel className="popup_calendar">
-                    <div className="calendar_popup_item">
-                      <div className="popup_calendar_card" >
-                        <div className="calendar_inner">
-                            <div className="calendar_relative">
-                                <div className="calendar_header">
-                                  <button type="button"  onClick={previousMonth}  className="calendar_next_prev_btn" >
-                                    <ChevronLeftIcon className="next_prev_icon" aria-hidden="true" />
-                                  </button>
+                  <div className="calendar_popup_item">
+                    <div className="popup_calendar_card">
+                      <div className="calendar_inner">
+                        <div className="calendar_relative">
+                          <div className="calendar_header">
+                            <button
+                              type="button"
+                              onClick={previousMonth}
+                              className="calendar_next_prev_btn"
+                            >
+                              <ChevronLeftIcon
+                                className="next_prev_icon"
+                                aria-hidden="true"
+                              />
+                            </button>
 
-                                  <span className="calendar_h2 tac">
-                                    {format(startCalendar, 'MMMM yyyy')}
-                                  </span>
-                                  <button onClick={nextMonth} type="button" className="calendar_next_prev_btn">
-                                    <ChevronRightIcon className="next_prev_icon" aria-hidden="true" />
-                                  </button>
-                                </div>
+                            <span className="calendar_h2 tac">
+                              {format(startCalendar, "MMMM yyyy")}
+                            </span>
+                            <button
+                              onClick={nextMonth}
+                              type="button"
+                              className="calendar_next_prev_btn"
+                            >
+                              <ChevronRightIcon
+                                className="next_prev_icon"
+                                aria-hidden="true"
+                              />
+                            </button>
+                          </div>
 
-                                <div className="calendar_week_names">
-                                  <div>S</div>
-                                  <div>M</div>
-                                  <div>T</div>
-                                  <div>W</div>
-                                  <div>T</div>
-                                  <div>F</div>
-                                  <div>S</div>
-                                </div>
-                                <div className="calendar_date_list">
-                                  {days.map((day, dayIdx) => (
-                                    <div
-                                      key={day.toString()}
-                                      className={classNames(
-                                        dayIdx === 0 && colStartClasses[getDay(day)],
-                                        'padding_y'
-                                      )}
-                                    >
-                                      <button
-                                        type="button"
-                                        onClick={() => {
-                                          console.log('====================================');
-                                          console.log(day);
-                                          console.log('====================================');
-                                          setToday(day)
-                                        }}
-                                        className={classNames(
-                                          "calender_default_btn", // default class
-                                          isEqual(day,today) && 'current_date_btn', // set current date color
-                                          (tday > day) && 'previous_next_month_btn', // disable previous date to select
-                                          !isSameMonth(day, today) &&  !(tday > day) && 'not_same_month', // set different month date color
-                                         )}
-                                      >
-                                        <time dateTime={format(day, 'yyyy-MM-dd')}>
-                                          {format(day, 'd')}
-                                        </time>
-                                      </button>
-                                    </div>
-                                  ))}
-                                </div>
-                            </div>
+                          <div className="calendar_week_names">
+                            <div>S</div>
+                            <div>M</div>
+                            <div>T</div>
+                            <div>W</div>
+                            <div>T</div>
+                            <div>F</div>
+                            <div>S</div>
+                          </div>
+                          <div className="calendar_date_list">
+                            {days.map((day, dayIdx) => (
+                              <div
+                                key={day.toString()}
+                                className={classNames(
+                                  dayIdx === 0 && colStartClasses[getDay(day)],
+                                  "padding_y"
+                                )}
+                              >
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    console.log(
+                                      "===================================="
+                                    );
+                                    console.log(day);
+                                    console.log(
+                                      "===================================="
+                                    );
+                                    setToday(day);
+                                  }}
+                                  className={classNames(
+                                    "calender_default_btn", // default class
+                                    isEqual(day, today) && "current_date_btn", // set current date color
+                                    tday > day && "previous_next_month_btn", // disable previous date to select
+                                    !isSameMonth(day, today) &&
+                                      !(tday > day) &&
+                                      "not_same_month" // set different month date color
+                                  )}
+                                >
+                                  <time dateTime={format(day, "yyyy-MM-dd")}>
+                                    {format(day, "d")}
+                                  </time>
+                                </button>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
+                  </div>
                 </Popover.Panel>
               </>
             )}
@@ -461,7 +517,7 @@ const Time = () => {
               </div>
               <div className="hr_container">
                 {timeTables.map((table, tableIndex) => {
-                  const doctorSchedule = scheduleJson[table.group];
+                  const scheduleFromDatabase = scheduleJson[table.group];
                   return (
                     <div key={table.group} className="hr_card_item">
                       <div className={"hr_card_content"}>
@@ -470,28 +526,30 @@ const Time = () => {
                             <div className="hr_card_header">
                               <div className="hr_card_title">{table.title}</div>
                               <div className="hr_card_save ">
-                              <Popover className="relative_card">
-                                {({ open }) => (
-                                  <>
-                                    <Popover.Button
-                                      onClick={processSubmit}
-                                      className={`${
-                                        open ? "" : "inactive"
-                                      } hr_card_save_btn `}
-                                    >
-                                      <DocumentDuplicateIcon className="icon_4 " />
-                                    </Popover.Button>
+                                <Popover className="relative_card">
+                                  {({ open }) => (
+                                    <>
+                                      <Popover.Button
+                                        onClick={processSubmit}
+                                        className={`${
+                                          open ? "" : "inactive"
+                                        } hr_card_save_btn `}
+                                      >
+                                        <DocumentDuplicateIcon className="icon_4 " />
+                                      </Popover.Button>
                                       <Popover.Panel className="hr_submit_popup">
                                         <div className="hr_popup_container">
                                           <div className="hr_popup_card">
                                             <div className="hr_popup_content">
                                               <div className="hr_popup_text">
                                                 <span>
-                                                  Start : { format(today, "yyyy-MM-dd") }
+                                                  Start :{" "}
+                                                  {format(today, "yyyy-MM-dd")}
                                                 </span>
                                                 <br />
                                                 <span>
-                                                  End : { format(today, "yyyy-MM-dd") }
+                                                  End :{" "}
+                                                  {format(today, "yyyy-MM-dd")}
                                                 </span>
                                                 <br />
                                               </div>
@@ -523,30 +581,33 @@ const Time = () => {
                                           </div>
                                         </div>
                                       </Popover.Panel>
-                                  </>
-                                )}
-                              </Popover>
-                            </div>
+                                    </>
+                                  )}
+                                </Popover>
+                              </div>
                             </div>
                             <div className="hr_btns_container">
                               {hours.map((hour, hrIndex) => {
                                 var haveSchedule = false;
-                                doctorSchedule.filter((hr) => {
-                                  if (isSameHour(hr, hour)) {
-                                    // console.log(hour);
-                                    haveSchedule = true;
-                                    return true;
-                                  }
-                                  return false;
-                                });
+                                if (
+                                  scheduleFromDatabase.length > 0 ||
+                                  scheduleFromDatabase != undefined
+                                ) {
+                                  scheduleFromDatabase.filter((hr) => {
+                                    if (isSameHour(hr, hour)) {
+                                      // console.log(hour);
+                                      haveSchedule = true;
+                                      return true;
+                                    }
+                                    return false;
+                                  });
+                                }
 
                                 return (
                                   <button
                                     key={hrIndex}
                                     type="button"
-                                    id={`${
-                                      table.group
-                                    }-${format(
+                                    id={`${table.group}-${format(
                                       hour,
                                       "MM-dd-yyyy"
                                     )}-${getHours(hour)}`}
@@ -569,9 +630,7 @@ const Time = () => {
                                       //   console.log("setSelectedH ",selectedH);
                                       // }
 
-                                      setMultiSelect(e,hour, table.group);
-
-
+                                      setMultiSelect(e, hour, table.group);
 
                                       // setSelectedHour(scheduleKey);
                                       // setSchedule(scheduleKey);
@@ -586,7 +645,7 @@ const Time = () => {
                                       ) &&
                                         table.group == "a" &&
                                         "a_selected", // disable previous date to select
-                                        selectedBMultiSelect.includes(
+                                      selectedBMultiSelect.includes(
                                         `${table.group}-${format(
                                           hour,
                                           "MM-dd-yyyy"
@@ -594,7 +653,7 @@ const Time = () => {
                                       ) &&
                                         table.group == "b" &&
                                         "b_selected", // disable previous date to select
-                                        selectedHMultiSelect.includes(
+                                      selectedHMultiSelect.includes(
                                         `${table.group}-${format(
                                           hour,
                                           "MM-dd-yyyy"

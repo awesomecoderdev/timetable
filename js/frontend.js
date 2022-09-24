@@ -2788,8 +2788,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _heroicons_react_solid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/react/solid */ "./node_modules/@heroicons/react/solid/index.js");
 /* harmony import */ var _heroicons_react_solid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_heroicons_react_solid__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/startOfToday/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/eachHourOfInterval/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/add/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 
@@ -2797,37 +2795,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var today = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])();
-var scheduleJson = [];
-scheduleJson["a"] = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])({
-  start: (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(today, {
-    days: 0,
-    hours: 20
-  }),
-  end: (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(today, {
-    days: 0,
-    hours: 21
-  })
-});
-scheduleJson["b"] = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])({
-  start: (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(today, {
-    days: 0,
-    hours: 21
-  }),
-  end: (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(today, {
-    days: 0,
-    hours: 22
-  })
-});
-scheduleJson["h"] = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])({
-  start: (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(today, {
-    days: 0,
-    hours: 23
-  }),
-  end: (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(today, {
-    days: 0,
-    hours: 24
-  })
-});
+var scheduleJson = []; // scheduleJson["a"] = eachHourOfInterval({
+//   start: add(today, { days:0, hours: 20 }),
+//   end: add(today, { days:0, hours: 21 }),
+// });
+// scheduleJson["b"] = eachHourOfInterval({
+//   start: add(today, { days:0, hours: 21 }),
+//   end: add(today, { days:0, hours: 22 }),
+// });
+// scheduleJson["h"] = eachHourOfInterval({
+//   start: add(today, { days:0, hours: 23 }),
+//   end: add(today, { days:0, hours: 24 }),
+// });
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   scheduleJson: scheduleJson
 });
@@ -3106,7 +3086,7 @@ var Time = function Time() {
 
     if (group == "a") {
       if (selectedA == null) {
-        if (hourbtn.classList.contains('a_selected')) {
+        if (hourbtn.classList.contains("a_selected")) {
           setSelectedA(null);
           hourbtn.classList.remove("a_selected");
         } else {
@@ -3116,7 +3096,7 @@ var Time = function Time() {
 
         console.log("selected selected A", selectedA);
       } else if ((0,date_fns__WEBPACK_IMPORTED_MODULE_14__["default"])(selectedA, hr)) {
-        if (hourbtn.classList.contains('a_selected')) {
+        if (hourbtn.classList.contains("a_selected")) {
           setSelectedA(null);
           hourbtn.classList.remove("a_selected");
         } else {
@@ -3124,14 +3104,14 @@ var Time = function Time() {
           setSelectedA(hr);
         }
 
-        document.querySelectorAll('.a_selected').forEach(function (e) {
-          if (e.classList.contains('a_selected')) {
+        document.querySelectorAll(".a_selected").forEach(function (e) {
+          if (e.classList.contains("a_selected")) {
             e.classList.remove("a_selected");
           }
         });
       } else {
-        document.querySelectorAll('.a_selected').forEach(function (e) {
-          if (e.classList.contains('a_selected')) {
+        document.querySelectorAll(".a_selected").forEach(function (e) {
+          if (e.classList.contains("a_selected")) {
             e.classList.remove("a_selected");
           }
         });
@@ -3158,7 +3138,7 @@ var Time = function Time() {
       }
     } else if (group == "b") {
       if (selectedB == null) {
-        if (hourbtn.classList.contains('b_selected')) {
+        if (hourbtn.classList.contains("b_selected")) {
           setSelectedB(null);
           hourbtn.classList.remove("b_selected");
         } else {
@@ -3168,7 +3148,7 @@ var Time = function Time() {
 
         console.log("selected selected B", selectedB);
       } else if ((0,date_fns__WEBPACK_IMPORTED_MODULE_14__["default"])(selectedB, hr)) {
-        if (hourbtn.classList.contains('b_selected')) {
+        if (hourbtn.classList.contains("b_selected")) {
           setSelectedB(null);
           hourbtn.classList.remove("b_selected");
         } else {
@@ -3176,14 +3156,14 @@ var Time = function Time() {
           setSelectedB(hr);
         }
 
-        document.querySelectorAll('.b_selected').forEach(function (e) {
-          if (e.classList.contains('b_selected')) {
+        document.querySelectorAll(".b_selected").forEach(function (e) {
+          if (e.classList.contains("b_selected")) {
             e.classList.remove("b_selected");
           }
         });
       } else {
-        document.querySelectorAll('.b_selected').forEach(function (e) {
-          if (e.classList.contains('b_selected')) {
+        document.querySelectorAll(".b_selected").forEach(function (e) {
+          if (e.classList.contains("b_selected")) {
             e.classList.remove("b_selected");
           }
         });
@@ -3215,7 +3195,7 @@ var Time = function Time() {
       }
     } else if (group == "h") {
       if (selectedH == null) {
-        if (hourbtn.classList.contains('h_selected')) {
+        if (hourbtn.classList.contains("h_selected")) {
           setSelectedH(null);
           hourbtn.classList.remove("h_selected");
         } else {
@@ -3225,7 +3205,7 @@ var Time = function Time() {
 
         console.log("selected selectedH", selectedH);
       } else if ((0,date_fns__WEBPACK_IMPORTED_MODULE_14__["default"])(selectedH, hr)) {
-        if (hourbtn.classList.contains('h_selected')) {
+        if (hourbtn.classList.contains("h_selected")) {
           setSelectedH(null);
           hourbtn.classList.remove("h_selected");
         } else {
@@ -3233,14 +3213,14 @@ var Time = function Time() {
           setSelectedH(hr);
         }
 
-        document.querySelectorAll('.h_selected').forEach(function (e) {
-          if (e.classList.contains('h_selected')) {
+        document.querySelectorAll(".h_selected").forEach(function (e) {
+          if (e.classList.contains("h_selected")) {
             e.classList.remove("h_selected");
           }
         });
       } else {
-        document.querySelectorAll('.h_selected').forEach(function (e) {
-          if (e.classList.contains('h_selected')) {
+        document.querySelectorAll(".h_selected").forEach(function (e) {
+          if (e.classList.contains("h_selected")) {
             e.classList.remove("h_selected");
           }
         });
@@ -3353,7 +3333,7 @@ var Time = function Time() {
                             })
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                             className: "calendar_h2 tac",
-                            children: (0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(startCalendar, 'MMMM yyyy')
+                            children: (0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(startCalendar, "MMMM yyyy")
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                             onClick: nextMonth,
                             type: "button",
@@ -3384,23 +3364,23 @@ var Time = function Time() {
                           className: "calendar_date_list",
                           children: days.map(function (day, dayIdx) {
                             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                              className: classNames(dayIdx === 0 && colStartClasses[(0,date_fns__WEBPACK_IMPORTED_MODULE_19__["default"])(day)], 'padding_y'),
+                              className: classNames(dayIdx === 0 && colStartClasses[(0,date_fns__WEBPACK_IMPORTED_MODULE_19__["default"])(day)], "padding_y"),
                               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                                 type: "button",
                                 onClick: function onClick() {
-                                  console.log('====================================');
+                                  console.log("====================================");
                                   console.log(day);
-                                  console.log('====================================');
+                                  console.log("====================================");
                                   setToday(day);
                                 },
                                 className: classNames("calender_default_btn", // default class
-                                (0,date_fns__WEBPACK_IMPORTED_MODULE_20__["default"])(day, today) && 'current_date_btn', // set current date color
-                                tday > day && 'previous_next_month_btn', // disable previous date to select
-                                !(0,date_fns__WEBPACK_IMPORTED_MODULE_21__["default"])(day, today) && !(tday > day) && 'not_same_month' // set different month date color
+                                (0,date_fns__WEBPACK_IMPORTED_MODULE_20__["default"])(day, today) && "current_date_btn", // set current date color
+                                tday > day && "previous_next_month_btn", // disable previous date to select
+                                !(0,date_fns__WEBPACK_IMPORTED_MODULE_21__["default"])(day, today) && !(tday > day) && "not_same_month" // set different month date color
                                 ),
                                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("time", {
-                                  dateTime: (0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(day, 'yyyy-MM-dd'),
-                                  children: (0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(day, 'd')
+                                  dateTime: (0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(day, "yyyy-MM-dd"),
+                                  children: (0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(day, "d")
                                 })
                               })
                             }, day.toString());
@@ -3430,7 +3410,7 @@ var Time = function Time() {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "hr_container",
             children: timeTables.map(function (table, tableIndex) {
-              var doctorSchedule = _Data__WEBPACK_IMPORTED_MODULE_2__.scheduleJson[table.group];
+              var scheduleFromDatabase = _Data__WEBPACK_IMPORTED_MODULE_2__.scheduleJson[table.group];
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                 className: "hr_card_item",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -3468,9 +3448,9 @@ var Time = function Time() {
                                         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                                           className: "hr_popup_text",
                                           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
-                                            children: ["Start : ", (0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(today, "yyyy-MM-dd")]
+                                            children: ["Start :", " ", (0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(today, "yyyy-MM-dd")]
                                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
-                                            children: ["End : ", (0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(today, "yyyy-MM-dd")]
+                                            children: ["End :", " ", (0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(today, "yyyy-MM-dd")]
                                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {})]
                                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
                                           name: "",
@@ -3510,15 +3490,19 @@ var Time = function Time() {
                         className: "hr_btns_container",
                         children: hours.map(function (hour, hrIndex) {
                           var haveSchedule = false;
-                          doctorSchedule.filter(function (hr) {
-                            if ((0,date_fns__WEBPACK_IMPORTED_MODULE_14__["default"])(hr, hour)) {
-                              // console.log(hour);
-                              haveSchedule = true;
-                              return true;
-                            }
 
-                            return false;
-                          });
+                          if (scheduleFromDatabase.length > 0 || scheduleFromDatabase != undefined) {
+                            scheduleFromDatabase.filter(function (hr) {
+                              if ((0,date_fns__WEBPACK_IMPORTED_MODULE_14__["default"])(hr, hour)) {
+                                // console.log(hour);
+                                haveSchedule = true;
+                                return true;
+                              }
+
+                              return false;
+                            });
+                          }
+
                           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                             type: "button",
                             id: "".concat(table.group, "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(hour, "MM-dd-yyyy"), "-").concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour)),

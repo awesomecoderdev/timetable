@@ -3405,26 +3405,37 @@ var Time = function Time() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "get_current_date",
             children: (0,date_fns__WEBPACK_IMPORTED_MODULE_12__["default"])(day, "d.MM.yyyy")
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "hr_container",
-            children: hours.map(function (hour, i) {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              className: "hr_time_btn heading",
+              children: "A"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              className: "hr_time_btn heading",
+              children: "B"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              className: "hr_time_btn heading",
+              children: "H"
+            }), hours.map(function (hour, i) {
               console.log('====================================');
               console.log(hour);
               console.log('====================================');
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
                 children: timeTables.map(function (table, tableIndex) {
-                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-                    className: "hr_time_btn",
-                    onClick: function onClick(e) {},
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("time", {
-                      dateTime: hour,
-                      className: "hr_time",
-                      children: [(0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour) < 10 ? "0" + (0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour) + ":00" : (0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour) + ":00", table.group]
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                      className: classNames("hr_time_btn", "hr-".concat((0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour)), "normal"),
+                      onClick: function onClick(e) {},
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("time", {
+                        dateTime: hour,
+                        className: "hr_time",
+                        children: (0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour) < 10 ? "0" + (0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour) + ":00" : (0,date_fns__WEBPACK_IMPORTED_MODULE_13__["default"])(hour) + ":00"
+                      })
                     })
                   });
                 })
               });
-            })
+            })]
           })]
         }, indexOfDay);
       })

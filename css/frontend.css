@@ -305,10 +305,11 @@ svg{
   /* gap: 1.25rem; */
   max-width: 1080px;
   margin: 2rem auto;
+  padding: 0 1rem;
 }
 @media (max-width: 1024px){
   .hours_wraper{
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     max-width: 1024px;
   }
 }
@@ -321,8 +322,17 @@ svg{
 @media (max-width: 640px){
   .hours_wraper {
     max-width: 640px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+@media (max-width: 374px){
+  .hours_wraper {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    padding: 0 1rem;
+  }
+}
+
 
 .hours_header_wraper{
   display: flex;
@@ -382,7 +392,6 @@ svg{
   margin: 0.2rem;
   border-width: 1px;
   border-color: rgb(156 163 175 / 0.2);
-  box-shadow:  0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 .get_current_date{
   font-family: 'Poppins','Courier New', Courier, monospace;
@@ -418,7 +427,7 @@ svg{
 
 @media (max-width: 425px){
   .hr_container{
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+    /* grid-template-columns: repeat(1, minmax(0, 1fr)); */
   }
 }
 
@@ -518,12 +527,12 @@ svg{
   color: rgb(255 255 255 / 1);
 }
 .hr_time_btn{
-  font-size: 0.5rem;
+  font-size: 0.65rem;
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 2rem;
+  width: 2rem;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
@@ -558,11 +567,11 @@ svg{
   opacity: 0.7;
 }
 .hr_time_btn.normal{
-
+  color: rgb(255 255 255 / 1);
   background-color: rgb(248 113 113 / 1);
 }
 .hr_time_btn.normal:hover{
-
+  color: rgb(255 255 255 / 1);
   background-color: rgb(239 68 68 / 1);
 }
 .hr_time_btn.a{
@@ -885,4 +894,11 @@ svg{
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+.hr_time_btn.hr-5{
+  margin-bottom:1rem ;
+}
+.hr_time_btn.heading{
+  background: whitesmoke;
 }

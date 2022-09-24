@@ -516,68 +516,40 @@ const Time = () => {
                 {format(day, "d.MM.yyyy")}
               </div>
               <div className="hr_container">
+              <button className="hr_time_btn heading">A</button>
+              <button className="hr_time_btn heading">B</button>
+              <button className="hr_time_btn heading">H</button>
                 {hours.map((hour,i) => {
                   console.log('====================================');
                   console.log(hour);
                   console.log('====================================');
 
-
                   return(
                     <>
                       {timeTables.map((table, tableIndex) => {
                         return(
+                          <>
                           <button
-                            className="hr_time_btn"
+                            className={classNames(
+                              "hr_time_btn",
+                              `hr-${getHours(hour)}`,
+                              "normal",
+                            )}
                             onClick={(e) => {}}
                           >
                             <time dateTime={hour} className="hr_time">
                               {getHours(hour) < 10
                                 ? "0" + getHours(hour) + ":00"
                                 : getHours(hour) + ":00"}
-                                {table.group}
+                                {/* {table.group} */}
                             </time>
                           </button>
+                          </>
                         )
                       })}
                     </>
                   )
                 })}
-
-{/*
-                {timeTables.map((table, tableIndex) => {
-                  const scheduleFromDatabase = scheduleJson[table.group];
-                  console.log('====================================');
-                  console.log(table);
-                  console.log('====================================');
-
-                  return(
-                    <>
-                      {hours.map((hour,i) => {
-                        console.log('====================================');
-                        console.log(hour);
-                        console.log('====================================');
-                        return(
-                          <button
-                            className="hr_time_btn"
-                            onClick={(e) => {}}
-                          >
-                            <time dateTime={hour} className="hr_time">
-                              {getHours(hour) < 10
-                                ? "0" + getHours(hour) + ":00"
-                                : getHours(hour) + ":00"}
-                                {table.group}
-                            </time>
-                          </button>
-                        )
-                      })}
-                    </>
-                  )
-
-
-
-
-
-                })} */}
               </div>
             </div>
           );

@@ -520,22 +520,40 @@ const Time = () => {
               <button className="hr_time_btn heading">B</button>
               <button className="hr_time_btn heading">H</button>
                 {hours.map((hour,i) => {
-                  console.log('====================================');
-                  console.log(hour);
-                  console.log('====================================');
-
                   return(
-                    <>
+                    <Fragment key={i}>
                       {timeTables.map((table, tableIndex) => {
+                        const scheduleFromDatabase = scheduleJson[table.group];
+                        var haveSchedule = false;
+                        scheduleFromDatabase.filter((hr) => {
+                          if (isSameHour(hr, hour)) {
+                            // console.log(hour);
+                            haveSchedule = true;
+                            return true;
+                          }
+                          return false;
+                        });
+
                         return(
-                          <>
                           <button
+                            key={`${table.group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`}
+                            id={`${table.group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`}
                             className={classNames(
                               "hr_time_btn",
                               `hr-${getHours(hour)}`,
-                              "normal",
+                              haveSchedule && table.group == "a" && "a",
+                              haveSchedule && table.group == "b" && "b",
+                              haveSchedule && table.group == "h" && "h",
+                              (selectedAMultiSelect.includes(`${table.group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`) && table.group == "a") ? "a_selected" : "", // disable previous date to select
+                              (selectedBMultiSelect.includes(`${table.group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`) && table.group == "b") ? "b_selected" : "", // disable previous date to select
+                              (selectedHMultiSelect.includes(`${table.group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`) && table.group == "h") ? "h_selected" : "", // disable previous date to select
+                              // "normal",
+                              !isSameHour(currentHour, hour) && currentHour > hour && "disabled", // disable previous date to select
+                              (currentHour <= hour || isSameHour(currentHour, hour)) && !haveSchedule && !selectedSchedule.includes(`${table.group}-${format(hour,"MM-dd-yyyy")}-${getHours(hour)}`) && "normal" // hover to normal time item
                             )}
-                            onClick={(e) => {}}
+                            onClick={(e) => {
+                              setMultiSelect(e, hour, table.group);
+                            }}
                           >
                             <time dateTime={hour} className="hr_time">
                               {getHours(hour) < 10
@@ -544,10 +562,9 @@ const Time = () => {
                                 {/* {table.group} */}
                             </time>
                           </button>
-                          </>
                         )
                       })}
-                    </>
+                    </Fragment>
                   )
                 })}
               </div>

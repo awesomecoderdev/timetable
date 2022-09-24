@@ -513,196 +513,78 @@ const Time = () => {
           return (
             <div key={indexOfDay} className="hour_group">
               <div className="get_current_date">
-                {format(day, "d MMMM yyyy")}
+                {format(day, "d.MM.yyyy")}
               </div>
               <div className="hr_container">
+                {hours.map((hour,i) => {
+                  console.log('====================================');
+                  console.log(hour);
+                  console.log('====================================');
+
+
+                  return(
+                    <>
+                      {timeTables.map((table, tableIndex) => {
+                        return(
+                          <button
+                            className="hr_time_btn"
+                            onClick={(e) => {}}
+                          >
+                            <time dateTime={hour} className="hr_time">
+                              {getHours(hour) < 10
+                                ? "0" + getHours(hour) + ":00"
+                                : getHours(hour) + ":00"}
+                                {table.group}
+                            </time>
+                          </button>
+                        )
+                      })}
+                    </>
+                  )
+                })}
+
+{/*
                 {timeTables.map((table, tableIndex) => {
                   const scheduleFromDatabase = scheduleJson[table.group];
-                  return (
-                    <div key={table.group} className="hr_card_item">
-                      <div className={"hr_card_content"}>
-                        <div className="hr_card_body">
-                          <div className="relative_card">
-                            <div className="hr_card_header">
-                              <div className="hr_card_title">{table.title}</div>
-                              <div className="hr_card_save ">
-                                <Popover className="relative_card">
-                                  {({ open }) => (
-                                    <>
-                                      <Popover.Button
-                                        onClick={processSubmit}
-                                        className={`${
-                                          open ? "" : "inactive"
-                                        } hr_card_save_btn `}
-                                      >
-                                        <DocumentDuplicateIcon className="icon_4 " />
-                                      </Popover.Button>
-                                      <Popover.Panel className="hr_submit_popup">
-                                        <div className="hr_popup_container">
-                                          <div className="hr_popup_card">
-                                            <div className="hr_popup_content">
-                                              <div className="hr_popup_text">
-                                                <span>
-                                                  Start :{" "}
-                                                  {format(today, "yyyy-MM-dd")}
-                                                </span>
-                                                <br />
-                                                <span>
-                                                  End :{" "}
-                                                  {format(today, "yyyy-MM-dd")}
-                                                </span>
-                                                <br />
-                                              </div>
-                                              <select
-                                                name=""
-                                                id=""
-                                                className="hr_popup_select"
-                                              >
-                                                <option value="">Demo 1</option>
-                                                <option value="">Demo 2</option>
-                                              </select>
-                                            </div>
-                                            <div className="hr_popup_footer_container">
-                                              <div className="hr_footer_btns">
-                                                <button
-                                                  onClick={processNeinAction}
-                                                  className="hr_popup_cancel_btn"
-                                                >
-                                                  Nein
-                                                </button>
-                                                <button
-                                                  onClick={processJaAction}
-                                                  className="hr_popup_ok_btn"
-                                                >
-                                                  Ja
-                                                </button>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </Popover.Panel>
-                                    </>
-                                  )}
-                                </Popover>
-                              </div>
-                            </div>
-                            <div className="hr_btns_container">
-                              {hours.map((hour, hrIndex) => {
-                                var haveSchedule = false;
-                                // console.log("scheduleFromDatabase",scheduleFromDatabase);
-                                // if (
-                                //   scheduleFromDatabase.length > 0 ||
-                                //   scheduleFromDatabase != undefined
-                                // ) {
-                                //   scheduleFromDatabase.filter((hr) => {
-                                //     if (isSameHour(hr, hour)) {
-                                //       // console.log(hour);
-                                //       haveSchedule = true;
-                                //       return true;
-                                //     }
-                                //     return false;
-                                //   });
-                                // }
+                  console.log('====================================');
+                  console.log(table);
+                  console.log('====================================');
 
-                                return (
-                                  <button
-                                    key={hrIndex}
-                                    type="button"
-                                    id={`${table.group}-${format(
-                                      hour,
-                                      "MM-dd-yyyy"
-                                    )}-${getHours(hour)}`}
-                                    onClick={(e) => {
-                                      const scheduleKey = `${
-                                        table.group
-                                      }-${format(
-                                        hour,
-                                        "MM-dd-yyyy"
-                                      )}-${getHours(hour)}`;
+                  return(
+                    <>
+                      {hours.map((hour,i) => {
+                        console.log('====================================');
+                        console.log(hour);
+                        console.log('====================================');
+                        return(
+                          <button
+                            className="hr_time_btn"
+                            onClick={(e) => {}}
+                          >
+                            <time dateTime={hour} className="hr_time">
+                              {getHours(hour) < 10
+                                ? "0" + getHours(hour) + ":00"
+                                : getHours(hour) + ":00"}
+                                {table.group}
+                            </time>
+                          </button>
+                        )
+                      })}
+                    </>
+                  )
 
-                                      // if(table.group =="a"){
-                                      //   setSelectedA(hour)
-                                      //   console.log("selected A",selectedA);
-                                      // }else  if(table.group =="b"){
-                                      //   setSelectedB(hour)
-                                      //   console.log("setSelectedB ",selectedB);
-                                      // }else if(table.group =="h"){
-                                      //   setSelectedH(hour)
-                                      //   console.log("setSelectedH ",selectedH);
-                                      // }
 
-                                      setMultiSelect(e, hour, table.group);
 
-                                      // setSelectedHour(scheduleKey);
-                                      // setSchedule(scheduleKey);
-                                    }}
-                                    className={classNames(
-                                      "hr_time_btn", // default class
-                                      selectedAMultiSelect.includes(
-                                        `${table.group}-${format(
-                                          hour,
-                                          "MM-dd-yyyy"
-                                        )}-${getHours(hour)}`
-                                      ) &&
-                                        table.group == "a" &&
-                                        "a_selected", // disable previous date to select
-                                      selectedBMultiSelect.includes(
-                                        `${table.group}-${format(
-                                          hour,
-                                          "MM-dd-yyyy"
-                                        )}-${getHours(hour)}`
-                                      ) &&
-                                        table.group == "b" &&
-                                        "b_selected", // disable previous date to select
-                                      selectedHMultiSelect.includes(
-                                        `${table.group}-${format(
-                                          hour,
-                                          "MM-dd-yyyy"
-                                        )}-${getHours(hour)}`
-                                      ) &&
-                                        table.group == "h" &&
-                                        "h_selected", // disable previous date to select
-                                      haveSchedule && table.group == "a" && "a",
-                                      haveSchedule && table.group == "b" && "b",
-                                      haveSchedule && table.group == "h" && "h",
-                                      // !(currentHour > hour) && !isSameHour(currentHour,hour) && 'hover:bg-gray-300', // hover to normal time item
-                                      !isSameHour(currentHour, hour) &&
-                                        currentHour > hour &&
-                                        "disabled", // disable previous date to select
-                                      (currentHour <= hour ||
-                                        isSameHour(currentHour, hour)) &&
-                                        !haveSchedule &&
-                                        !selectedSchedule.includes(
-                                          `${table.group}-${format(
-                                            hour,
-                                            "MM-dd-yyyy"
-                                          )}-${getHours(hour)}`
-                                        ) &&
-                                        "normal" // hover to normal time item
-                                    )}
-                                  >
-                                    <time dateTime={hour} className="hr_time">
-                                      {getHours(hour) < 10
-                                        ? "0" + getHours(hour) + ":00"
-                                        : getHours(hour) + ":00"}
-                                    </time>
-                                  </button>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+
+
+                })} */}
               </div>
             </div>
           );
         })}
 
         {/* start the tab */}
-        <div className="hour_group">
+        {/* <div className="hour_group">
           <div className="hr_tab_item">
             <div className={"hr_tabs"}>
               <Tab.Group>
@@ -729,7 +611,7 @@ const Time = () => {
               </Tab.Group>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </Fragment>
   );
